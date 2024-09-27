@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 import { getBaseURL } from '@lib/util/env'
 import Footer from '@modules/layout/templates/footer'
-import NavWrapper from '@modules/layout/templates/nav'
+import Nav from '@modules/layout/templates/nav'
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -14,9 +14,9 @@ export default function PageLayout(props: {
 }) {
   return (
     <>
-      <NavWrapper countryCode={props.params.countryCode} />
+      <Nav />
       {props.children}
-      <Footer countryCode={props.params.countryCode} />
+      <Footer />
     </>
   )
 }
