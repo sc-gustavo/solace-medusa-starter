@@ -1,42 +1,75 @@
-'use client'
+import React, { useEffect, useImperativeHandle, useState } from 'react'
 
-import { forwardRef, InputHTMLAttributes, useRef } from 'react'
+import { Label } from '@medusajs/ui'
+import Eye from '@modules/common/icons/eye'
+import EyeOff from '@modules/common/icons/eye-off'
 
-import { cn } from '@lib/util/cn'
-import { mergeRefs } from '@lib/util/merge-refs'
-import { SearchIcon } from '@modules/common/icons/search'
+type InputProps = Omit<
+  Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>,
+  'placeholder'
+> & {
+  label: string
+  errors?: Record<string, unknown>
+  touched?: Record<string, unknown>
+  name: string
+  topLabel?: string
+}
 
-const Input = forwardRef<
-  HTMLInputElement,
-  InputHTMLAttributes<HTMLInputElement>
->((props, forwardedRef) => {
-  const localRef = useRef<HTMLInputElement>(null)
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ type, name, label, touched, required, topLabel, ...props }, ref) => {
+    const inputRef = React.useRef<HTMLInputElement>(null)
+    const [showPassword, setShowPassword] = useState(false)
+    const [inputType, setInputType] = useState(type)
 
-  const handleClick = () => {
-    localRef.current?.focus()
+    useEffect(() => {
+      if (type === 'password' && showPassword) {
+        setInputType('text')
+      }
+
+      if (type === 'password' && !showPassword) {
+        setInputType('password')
+      }
+    }, [type, showPassword])
+
+    useImperativeHandle(ref, () => inputRef.current!)
+
+    return (
+      <div className="flex w-full flex-col">
+        {topLabel && (
+          <Label className="txt-compact-medium-plus mb-2">{topLabel}</Label>
+        )}
+        <div className="txt-compact-medium relative z-0 flex w-full">
+          <input
+            type={inputType}
+            name={name}
+            placeholder=" "
+            required={required}
+            className="mt-0 block h-11 w-full appearance-none rounded-md border border-ui-border-base bg-ui-bg-field px-4 pb-1 pt-4 hover:bg-ui-bg-field-hover focus:shadow-borders-interactive-with-active focus:outline-none focus:ring-0"
+            {...props}
+            ref={inputRef}
+          />
+          <label
+            htmlFor={name}
+            onClick={() => inputRef.current?.focus()}
+            className="-z-1 origin-0 absolute top-3 mx-3 flex items-center justify-center px-1 text-ui-fg-subtle transition-all duration-300"
+          >
+            {label}
+            {required && <span className="text-rose-500">*</span>}
+          </label>
+          {type === 'password' && (
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-0 top-3 px-4 text-ui-fg-subtle outline-none transition-all duration-150 focus:text-ui-fg-base focus:outline-none"
+            >
+              {showPassword ? <Eye /> : <EyeOff />}
+            </button>
+          )}
+        </div>
+      </div>
+    )
   }
-
-  return (
-    <div
-      className={cn(
-        'border-primary focus-within:ring-action-primary [.dark_&]:focus-within:ring-action-primary focus-within:ring-offset-action-primary [.dark_&]:focus-within:ring-offset-action-primary flex h-12 w-full items-center rounded-xl border bg-secondary px-4 py-3.5 outline-none file:border-0 file:bg-transparent file:pt-1 file:text-md file:font-medium focus-within:border focus-within:border-action-primary focus-within:ring-0 focus-within:ring-offset-0 [.dark_&:focus-within]:border-action-primary [.dark_&]:border-transparent [.dark_&]:bg-fg-tertiary',
-        {
-          'cursor-not-allowed border-transparent bg-disabled text-disabled':
-            props.disabled,
-        },
-        props.className
-      )}
-      onClick={handleClick}
-    >
-      {props.type === 'search' && <SearchIcon className="mr-2 h-5 w-5" />}
-      <input
-        ref={mergeRefs(localRef, forwardedRef)}
-        {...props}
-        className="w-full bg-transparent text-md outline-none placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-offset-0 [.dark_&]:placeholder:text-static"
-      />
-    </div>
-  )
-})
+)
 
 Input.displayName = 'Input'
 
