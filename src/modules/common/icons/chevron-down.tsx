@@ -2,7 +2,7 @@ import React from 'react'
 
 import { IconProps } from 'types/icon'
 
-export const ChevronDownIcon = (props: IconProps) => {
+const ChevronDown = (props: IconProps) => {
   return (
     <svg
       width="20"
@@ -20,3 +20,5 @@ export const ChevronDownIcon = (props: IconProps) => {
     </svg>
   )
 }
+
+export default ChevronDown

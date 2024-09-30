@@ -9,12 +9,12 @@ import {
 } from '@modules/common/components/accordion'
 import { Box } from '@modules/common/components/box'
 import { Container } from '@modules/common/components/container'
-import { Divider } from '@modules/common/components/divider'
+import Divider from '@modules/common/components/divider'
 import { Heading } from '@modules/common/components/heading'
 import LocalizedClientLink from '@modules/common/components/localized-client-link'
 import { NavigationItem } from '@modules/common/components/navigation-item'
 import { Text } from '@modules/common/components/text'
-import { ChevronDownIcon } from '@modules/common/icons/chevron-down'
+import ChevronDown from '@modules/common/icons/chevron-down'
 import { FacebookIcon } from '@modules/common/icons/facebook'
 import { LinkedinIcon } from '@modules/common/icons/linkedin'
 import { SolaceLogo } from '@modules/common/icons/solace-logo'
@@ -23,17 +23,17 @@ import { XIcon } from '@modules/common/icons/twitter'
 function SocialMedia({ className }: { className?: string }) {
   return (
     <Box className={cn('flex gap-2', className)}>
-      <div className="text-static flex h-12 w-12 cursor-pointer items-center justify-center rounded-full">
+      <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full text-static">
         <LocalizedClientLink href="#">
           <LinkedinIcon />
         </LocalizedClientLink>
       </div>
-      <div className="text-static flex h-12 w-12 cursor-pointer items-center justify-center rounded-full">
+      <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full text-static">
         <LocalizedClientLink href="#">
           <FacebookIcon />
         </LocalizedClientLink>
       </div>
-      <div className="text-static flex h-12 w-12 cursor-pointer items-center justify-center rounded-full">
+      <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full text-static">
         <LocalizedClientLink href="#">
           <XIcon />
         </LocalizedClientLink>
@@ -49,14 +49,14 @@ export default async function Footer({ countryCode }: { countryCode: string }) {
   return (
     <Container
       as="footer"
-      className="bg-static mx-0 max-w-full px-0 py-0 small:px-0 small:py-0"
+      className="mx-0 max-w-full bg-static px-0 py-0 small:px-0 small:py-0"
     >
-      <Container className="text-static flex flex-col gap-6 small:gap-12">
-        <Box className="flex flex-col gap-8 small:gap-12 xl:gap-0 large:flex-row">
+      <Container className="flex flex-col gap-6 text-static small:gap-12">
+        <Box className="flex flex-col gap-8 small:gap-12 large:flex-row xl:gap-0">
           <Box className="flex flex-col justify-between xl:min-w-[437px]">
             <LocalizedClientLink
               href="#"
-              className="text-static w-max cursor-pointer"
+              className="w-max cursor-pointer text-static"
             >
               <SolaceLogo />
             </LocalizedClientLink>
@@ -78,7 +78,7 @@ export default async function Footer({ countryCode }: { countryCode: string }) {
                         href={`/${countryCode}${link.href}`}
                         key={`${id}-navigationItem-${linkId}`}
                         variant="secondary"
-                        className="hover:text-static w-max"
+                        className="w-max hover:text-static"
                       >
                         {link.title}
                       </NavigationItem>
@@ -102,16 +102,16 @@ export default async function Footer({ countryCode }: { countryCode: string }) {
                 >
                   <AccordionTrigger className="transition-all [&[data-state=open]>#chevronDownSvg]:rotate-180">
                     <Heading
-                      className="text-static text-md font-medium small:text-lg"
+                      className="text-md font-medium text-static small:text-lg"
                       as="h3"
                     >
                       {item.header}
                     </Heading>
                     <div
                       id="chevronDownSvg"
-                      className="text-static flex h-12 w-12 shrink-0 items-center justify-center duration-200 ease-in-out"
+                      className="flex h-12 w-12 shrink-0 items-center justify-center text-static duration-200 ease-in-out"
                     >
-                      <ChevronDownIcon />
+                      <ChevronDown />
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="flex flex-col gap-3">
@@ -136,14 +136,14 @@ export default async function Footer({ countryCode }: { countryCode: string }) {
         </Box>
         <Divider alignment="horizontal" variant="secondary" />
         <Box className="flex flex-wrap gap-6 gap-y-1">
-          <Text size="md" className="text-secondary shrink-0">
+          <Text size="md" className="shrink-0 text-secondary">
             © {new Date().getFullYear()} Solace. All rights reserved.
           </Text>
           {footerNavigation.other.map((link, id) => (
             <NavigationItem
               key={`other-${id}`}
               variant="secondary"
-              className="hover:text-static shrink-0"
+              className="shrink-0 hover:text-static"
               href={link.href}
             >
               {link.title}

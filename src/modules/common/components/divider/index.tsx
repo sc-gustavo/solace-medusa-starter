@@ -24,7 +24,7 @@ type DividerProps = {
   className?: string
 }
 
-export function Divider({ variant, alignment, className }: DividerProps) {
+function Divider({ variant, alignment, className }: DividerProps) {
   return (
     <div
       data-testid="divider"
@@ -32,3 +32,5 @@ export function Divider({ variant, alignment, className }: DividerProps) {
     />
   )
 }
+
+export default Divider

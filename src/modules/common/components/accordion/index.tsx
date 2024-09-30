@@ -14,7 +14,7 @@ export const AccordionItem = forwardRef<
       ref={forwardedRef}
       className={cn(
         className,
-        'border-basic-primary rounded-[20px] border-[.5px] bg-transparent'
+        'rounded-[20px] border-[.5px] border-basic-primary bg-transparent'
       )}
       {...props}
     >
@@ -53,7 +53,7 @@ export const AccordionContent = forwardRef<
     <RadixAccordion.Content
       ref={forwardedRef}
       {...props}
-      className="all data-[state=closed]:animate-slide-up data-[state=open]:animate-slide-down overflow-hidden transition"
+      className="all overflow-hidden transition data-[state=closed]:animate-slide-up data-[state=open]:animate-slide-down"
     >
       <div className={cn(className, 'pb-2')}>{children}</div>
     </RadixAccordion.Content>

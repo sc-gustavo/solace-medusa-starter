@@ -6,7 +6,7 @@ import { cn } from '@lib/util/cn'
 import { mergeRefs } from '@lib/util/merge-refs'
 import { SearchIcon } from '@modules/common/icons/search'
 
-export const Input = forwardRef<
+const Input = forwardRef<
   HTMLInputElement,
   InputHTMLAttributes<HTMLInputElement>
 >((props, forwardedRef) => {
@@ -19,9 +19,9 @@ export const Input = forwardRef<
   return (
     <div
       className={cn(
-        'border-primary focus-within:ring-action-primary [.dark_&]:focus-within:ring-action-primary focus-within:ring-offset-action-primary [.dark_&]:focus-within:ring-offset-action-primary bg-secondary file:text-md focus-within:border-action-primary [.dark_&:focus-within]:border-action-primary [.dark_&]:bg-fg-tertiary flex h-12 w-full items-center rounded-xl border px-4 py-3.5 outline-none file:border-0 file:bg-transparent file:pt-1 file:font-medium focus-within:border focus-within:ring-0 focus-within:ring-offset-0 [.dark_&]:border-transparent',
+        'border-primary focus-within:ring-action-primary [.dark_&]:focus-within:ring-action-primary focus-within:ring-offset-action-primary [.dark_&]:focus-within:ring-offset-action-primary flex h-12 w-full items-center rounded-xl border bg-secondary px-4 py-3.5 outline-none file:border-0 file:bg-transparent file:pt-1 file:text-md file:font-medium focus-within:border focus-within:border-action-primary focus-within:ring-0 focus-within:ring-offset-0 [.dark_&:focus-within]:border-action-primary [.dark_&]:border-transparent [.dark_&]:bg-fg-tertiary',
         {
-          'bg-disabled text-disabled cursor-not-allowed border-transparent':
+          'cursor-not-allowed border-transparent bg-disabled text-disabled':
             props.disabled,
         },
         props.className
@@ -32,10 +32,12 @@ export const Input = forwardRef<
       <input
         ref={mergeRefs(localRef, forwardedRef)}
         {...props}
-        className="text-md placeholder:text-secondary [.dark_&]:placeholder:text-static w-full bg-transparent outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
+        className="w-full bg-transparent text-md outline-none placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-offset-0 [.dark_&]:placeholder:text-static"
       />
     </div>
   )
 })
 
 Input.displayName = 'Input'
+
+export default Input
