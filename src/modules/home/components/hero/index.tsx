@@ -12,7 +12,7 @@ const Hero = ({ data }: { data: HeroBanner }) => {
   const { Headline, Text: text, CTA, Image: bannerImage } = data
 
   return (
-    <Container className="flex flex-col !p-0 2xl:px-14">
+    <>
       <Box className="h-[168px] max-h-[368px] w-full small:h-[368px] 2xl:h-[468px] 2xl:max-h-[468px]">
         <Image
           src={bannerImage.url}
@@ -22,7 +22,7 @@ const Hero = ({ data }: { data: HeroBanner }) => {
           height={600}
         />
       </Box>
-      <Box className="flex flex-col gap-2 px-4 py-6 small:gap-8 small:px-14 small:py-10">
+      <Container className="flex flex-col gap-2 !py-6 small:gap-8 small:!py-10">
         <Heading className="max-w-full text-4xl text-basic-primary small:max-w-[510px] medium:text-5xl">
           {Headline}
         </Heading>
@@ -39,8 +39,8 @@ const Hero = ({ data }: { data: HeroBanner }) => {
             {text}
           </Text>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </>
   )
 }
 
