@@ -1,6 +1,5 @@
 import { HttpTypes } from '@medusajs/types'
 import { Container } from '@modules/common/components/container'
-
 import EmptyCartMessage from '../components/empty-cart-message'
 import ItemsTemplate from './items'
 import Summary from './summary'
