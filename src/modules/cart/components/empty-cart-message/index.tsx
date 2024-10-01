@@ -14,7 +14,7 @@ const EmptyCartMessage = () => {
           Your shopping cart is empty
         </Heading>
         <Text size="md" className="text-secondary">
-          Are you looking fo inspiration?
+          Are you looking for inspiration?
         </Text>
       </Box>
       <Button asChild>
