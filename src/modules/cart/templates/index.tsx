@@ -1,9 +1,7 @@
 import { HttpTypes } from '@medusajs/types'
 import { Container } from '@modules/common/components/container'
-import Divider from '@modules/common/components/divider'
 
 import EmptyCartMessage from '../components/empty-cart-message'
-import SignInPrompt from '../components/sign-in-prompt'
 import ItemsTemplate from './items'
 import Summary from './summary'
 
@@ -15,35 +13,31 @@ const CartTemplate = ({
   customer: HttpTypes.StoreCustomer | null
 }) => {
   return (
-    <Container className="flex items-center justify-center">
-      {cart?.items?.length ? (
-        <div className="grid grid-cols-1 gap-x-40 small:grid-cols-[1fr_360px]">
-          <div className="flex flex-col gap-y-6 bg-white py-6">
-            {!customer && (
-              <>
-                <SignInPrompt />
-                <Divider />
-              </>
-            )}
-            <ItemsTemplate items={cart?.items} />
-          </div>
-          <div className="relative">
-            <div className="sticky top-12 flex flex-col gap-y-8">
-              {cart && cart.region && (
-                <>
-                  <div className="bg-white py-6">
-                    <Summary cart={cart as any} />
-                  </div>
-                </>
-              )}
+    <Container className="mx-0 max-w-full bg-secondary px-0 py-0 small:px-0 small:py-0">
+      <Container className="flex items-center justify-center">
+        {cart?.items?.length ? (
+          <div className="flex w-full flex-col gap-4 large:flex-row large:justify-between large:gap-0">
+            <div className="flex max-w-[765px] shrink grow flex-col gap-4 large:mr-12">
+              <ItemsTemplate items={cart?.items} />
+            </div>
+            <div className="relative">
+              <div className="sticky top-12 flex flex-col gap-y-8">
+                {cart && cart.region && (
+                  <>
+                    <div className="bg-white py-6">
+                      <Summary cart={cart as any} />
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div>
-          <EmptyCartMessage />
-        </div>
-      )}
+        ) : (
+          <div>
+            <EmptyCartMessage />
+          </div>
+        )}
+      </Container>
     </Container>
   )
 }
