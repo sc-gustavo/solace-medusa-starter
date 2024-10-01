@@ -11,7 +11,6 @@ import { Button } from '@modules/common/components/button'
 import { Heading } from '@modules/common/components/heading'
 import LocalizedClientLink from '@modules/common/components/localized-client-link'
 import { BasketIcon } from '@modules/common/icons/basket'
-import HeartIcon from '@modules/common/icons/heart'
 
 import ProductPrice from './price'
 
@@ -34,10 +33,6 @@ export default function ProductTile({ product }: { product: StoreProduct }) {
     console.log('Added to cart!')
   }
 
-  const handleAddToFavorites = () => {
-    console.log('Added to favorites!')
-  }
-
   return (
     <Box className="group flex flex-col">
       <Box className="relative h-[290px] small:h-[504px]">
@@ -46,13 +41,6 @@ export default function ProductTile({ product }: { product: StoreProduct }) {
             <Badge label="New product" variant="brand" />
           </Box>
         )}
-        <Button
-          withIcon
-          onClick={handleAddToFavorites}
-          className="absolute right-3 top-3 bg-fg-secondary opacity-100 transition-opacity duration-300 hover:bg-fg-secondary group-hover:opacity-100 small:opacity-0"
-        >
-          <HeartIcon color="black" />
-        </Button>
 
         <LocalizedClientLink href={`/products/${product.handle}`}>
           <Image
