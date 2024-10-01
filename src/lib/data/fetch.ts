@@ -33,7 +33,6 @@ export const getHeroBannerData = async (): Promise<HeroBannerData> => {
   return res.json()
 }
 
-// Homepage data
 export const getCollectionsData = async (): Promise<CollectionsData> => {
   const res = await fetchStrapiClient(`/api/collections?&populate=*`, {
     next: { tags: ['collections-main'] },

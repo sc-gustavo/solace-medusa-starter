@@ -13,7 +13,6 @@ import { getProductsList } from '@lib/data/products'
 import { getRegion } from '@lib/data/regions'
 import Collections from '@modules/home/components/collections'
 import { ExploreBlog } from '@modules/home/components/explore-blog'
-import FeaturedProducts from '@modules/home/components/featured-products'
 import Hero from '@modules/home/components/hero'
 import { OurBestsellers } from '@modules/home/components/our-bestsellers'
 
@@ -56,17 +55,12 @@ export default async function Home({
   return (
     <>
       <Hero data={HeroBanner} />
+      <Collections
+        cmsCollections={strapiCollections}
+        medusaCollections={collectionsList}
+      />
       <OurBestsellers products={products} />
       <ExploreBlog posts={posts} />
-      <div className="py-12">
-        <ul className="flex flex-col gap-x-6">
-          <FeaturedProducts collections={collections} region={region} />
-          <Collections
-            cmsCollections={strapiCollections}
-            medusaCollections={collectionsList}
-          />
-        </ul>
-      </div>
     </>
   )
 }
