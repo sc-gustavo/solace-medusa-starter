@@ -109,11 +109,8 @@ const Item = ({ item, type = 'full' }: ItemProps) => {
             {updating && <Spinner />}
           </Box>
         </Box>
-        <Box className="flex flex-col justify-between">
-          <DeleteButton
-            id={item.id}
-            className="h-12 w-12 justify-center self-end"
-          />
+        <Box className="flex flex-col items-end justify-between">
+          <DeleteButton id={item.id} className="w-12" />
           <Box className="hidden small:block">
             <LineItemPrice item={item} style="tight" />
           </Box>
