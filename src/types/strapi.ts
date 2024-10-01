@@ -36,6 +36,20 @@ export type HeroBannerData = {
   }
 }
 
+export type BlogPost = {
+  Title: string
+  Slug: string
+  Content: string
+  FeaturedImage: {
+    url: string
+    alternativeText?: string
+  }
+}
+
+export type BlogData = {
+  data: BlogPost[]
+}
+
 export type Collection = {
   id: number
   documentId: string

@@ -1,4 +1,4 @@
-import { CollectionsData, HeroBannerData } from 'types/strapi'
+import { BlogData, CollectionsData, HeroBannerData } from 'types/strapi'
 
 export const fetchStrapiClient = async (
   endpoint: string,
@@ -38,6 +38,17 @@ export const getCollectionsData = async (): Promise<CollectionsData> => {
   const res = await fetchStrapiClient(`/api/collections?&populate=*`, {
     next: { tags: ['collections-main'] },
   })
+
+  return res.json()
+}
+
+export const getExploreBlogData = async (): Promise<BlogData> => {
+  const res = await fetchStrapiClient(
+    `/api/blogs?populate[1]=FeaturedImage&sort=createdAt:desc&pagination[start]=0&pagination[limit]=3`,
+    {
+      next: { tags: ['explore-blog'] },
+    }
+  )
 
   return res.json()
 }
