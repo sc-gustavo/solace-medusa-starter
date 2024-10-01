@@ -4,7 +4,7 @@ import ProductTile from '@modules/products/components/product-tile'
 import { Pagination } from '@modules/store/components/pagination'
 import { SortOptions } from '@modules/store/components/refinement-list/sort-products'
 
-const PRODUCT_LIMIT = 12
+const PRODUCT_LIMIT = 3
 
 type PaginatedProductsParams = {
   limit: number
@@ -30,7 +30,7 @@ export default async function PaginatedProducts({
   countryCode: string
 }) {
   const queryParams: PaginatedProductsParams = {
-    limit: 12,
+    limit: PRODUCT_LIMIT,
   }
 
   if (collectionId) {
@@ -69,7 +69,7 @@ export default async function PaginatedProducts({
   return (
     <>
       <ul
-        className="grid w-full grid-cols-1 gap-x-2 gap-y-6 medium:grid-cols-3"
+        className="grid w-full grid-cols-1 gap-x-2 gap-y-6 small:grid-cols-2 large:grid-cols-3"
         data-testid="products-list"
       >
         {products.map((p) => {
