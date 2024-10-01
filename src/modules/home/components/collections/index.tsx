@@ -92,7 +92,7 @@ const Collections = ({
 
   const newestCollections = useMemo(() => {
     if (!validCollections) return null
-    validCollections.slice(0, 3)
+    return validCollections.slice(0, 3)
   }, [validCollections])
 
   if (!newestCollections) return null
