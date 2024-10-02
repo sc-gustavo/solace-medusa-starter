@@ -8,9 +8,11 @@ import {
   getCollectionsData,
   getExploreBlogData,
   getHeroBannerData,
+  getMidBannerData,
 } from '@lib/data/fetch'
 import { getProductsList } from '@lib/data/products'
 import { getRegion } from '@lib/data/regions'
+import { Banner } from '@modules/home/components/banner'
 import Collections from '@modules/home/components/collections'
 import { ExploreBlog } from '@modules/home/components/explore-blog'
 import Hero from '@modules/home/components/hero'
@@ -46,6 +48,10 @@ export default async function Home({
     data: { HeroBanner },
   } = await getHeroBannerData()
 
+  const {
+    data: { MidBanner },
+  } = await getMidBannerData()
+
   const { data: posts } = await getExploreBlogData()
 
   if (!products || !collections || !region) {
@@ -60,6 +66,7 @@ export default async function Home({
         medusaCollections={collectionsList}
       />
       <OurBestsellers products={products} />
+      <Banner data={MidBanner} />
       <ExploreBlog posts={posts} />
     </>
   )
