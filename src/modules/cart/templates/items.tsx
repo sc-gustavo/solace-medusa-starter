@@ -1,7 +1,6 @@
 import repeat from '@lib/util/repeat'
 import { HttpTypes } from '@medusajs/types'
 import Item from '@modules/cart/components/item'
-import { Container } from '@modules/common/components/container'
 import SkeletonLineItem from '@modules/skeletons/components/skeleton-line-item'
 
 type ItemsTemplateProps = {
