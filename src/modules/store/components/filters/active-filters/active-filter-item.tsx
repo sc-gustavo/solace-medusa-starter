@@ -3,7 +3,6 @@ import { Chips } from '@modules/common/components/chips'
 import { Label } from '@modules/common/components/label'
 import { XIcon } from '@modules/common/icons/x'
 
-
 type ActiveFilterItemProps = {
   label: string
   filterKey: string
