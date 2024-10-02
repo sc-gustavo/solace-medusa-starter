@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 
 import { HttpTypes } from '@medusajs/types'
-import Input from '@modules/common/components/input'
+import { Input } from '@modules/common/components/input'
 import { useFormState } from 'react-dom'
 
 import AccountInfo from '../account-info'
@@ -45,21 +45,18 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
       >
         <div className="grid grid-cols-2 gap-4">
           <Input
-            label="Old password"
             name="old_password"
             required
             type="password"
             data-testid="old-password-input"
           />
           <Input
-            label="New password"
             type="password"
             name="new_password"
             required
             data-testid="new-password-input"
           />
           <Input
-            label="Confirm password"
             type="password"
             name="confirm_password"
             required

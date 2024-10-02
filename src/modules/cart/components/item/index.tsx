@@ -55,10 +55,9 @@ const Item = ({ item, type = 'full' }: ItemProps) => {
       <Box>
         <LocalizedClientLink href={`/products/${handle}`}>
           <Thumbnail
-            className="h-[92px] rounded-none small:h-full"
+            className="h-[92px] max-w-[92px] rounded-none small:h-full small:max-w-[146px]"
             thumbnail={item.variant?.product?.thumbnail}
             images={item.variant?.product?.images}
-            size="square"
           />
         </LocalizedClientLink>
       </Box>
@@ -110,7 +109,7 @@ const Item = ({ item, type = 'full' }: ItemProps) => {
           </Box>
         </Box>
         <Box className="flex flex-col items-end justify-between">
-          <DeleteButton id={item.id} className="w-12" />
+          <DeleteButton id={item.id} className="w-12 hover:bg-transparent" />
           <Box className="hidden small:block">
             <LineItemPrice item={item} style="tight" />
           </Box>

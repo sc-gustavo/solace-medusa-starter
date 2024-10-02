@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import { deleteLineItem } from '@lib/data/cart'
-import { Spinner, Trash } from '@medusajs/icons'
+import { Spinner } from '@medusajs/icons'
 import { clx } from '@medusajs/ui'
 import { Button } from '@modules/common/components/button'
+import { TrashIcon } from '@modules/common/icons'
 
 const DeleteButton = ({
   id,
@@ -32,7 +33,7 @@ const DeleteButton = ({
       className={clx('bg-primary', className)}
       onClick={() => handleDelete(id)}
     >
-      {isDeleting ? <Spinner className="animate-spin" /> : <Trash />}
+      {isDeleting ? <Spinner className="animate-spin" /> : <TrashIcon />}
       {children && <span>{children}</span>}
     </Button>
   )
