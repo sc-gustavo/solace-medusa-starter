@@ -1,11 +1,12 @@
 import { Suspense } from 'react'
 import { notFound } from 'next/navigation'
 
-import { HttpTypes, StoreCollection } from '@medusajs/types'
+import { HttpTypes, StoreCollection, StoreProduct } from '@medusajs/types'
 import { Box } from '@modules/common/components/box'
 import { Container } from '@modules/common/components/container'
 import { Heading } from '@modules/common/components/heading'
 import { Text } from '@modules/common/components/text'
+import { ProductCarousel } from '@modules/products/components/product-carousel'
 import SkeletonProductGrid from '@modules/skeletons/templates/skeleton-product-grid'
 import ProductFilters from '@modules/store/components/filters'
 import ActiveProductFilters from '@modules/store/components/filters/active-filters'
@@ -20,12 +21,14 @@ export default function CategoryTemplate({
   sortBy,
   page,
   countryCode,
+  recommendedProducts,
   collections,
 }: {
   categories: HttpTypes.StoreProductCategory[]
   sortBy?: SortOptions
   page?: string
   countryCode: string
+  recommendedProducts: StoreProduct[]
   collections: StoreCollection[]
 }) {
   const pageNumber = page ? parseInt(page) : 1
@@ -36,36 +39,45 @@ export default function CategoryTemplate({
   if (!category || !countryCode) notFound()
 
   return (
-    <Container className="flex flex-col gap-8 !py-8">
-      <Box className="flex flex-col gap-4">
-        <StoreBreadcrumbs category={category} />
-        <Heading as="h1" className="text-4xl text-basic-primary small:text-5xl">
-          {category.name}
-        </Heading>
-        {/* TODO: Fetch products count after meilisearch connection */}
-        <Text className="text-md text-secondary">50 products</Text>
-        <Box className="grid w-full grid-cols-2 items-center justify-between gap-2 small:flex small:flex-wrap">
-          <Box className="hidden small:flex">
-            <ProductFilters collections={collections} />
+    <>
+      <Container className="flex flex-col gap-8 !py-8">
+        <Box className="flex flex-col gap-4">
+          <StoreBreadcrumbs category={category} />
+          <Heading
+            as="h1"
+            className="text-4xl text-basic-primary small:text-5xl"
+          >
+            {category.name}
+          </Heading>
+          {/* TODO: Fetch products count after meilisearch connection */}
+          <Text className="text-md text-secondary">50 products</Text>
+          <Box className="grid w-full grid-cols-2 items-center justify-between gap-2 small:flex small:flex-wrap">
+            <Box className="hidden small:flex">
+              <ProductFilters collections={collections} />
+            </Box>
+            <ProductFiltersDrawer>
+              <ProductFilters collections={collections} />
+            </ProductFiltersDrawer>
+            <RefinementList sortBy={sortBy || 'created_at'} />
           </Box>
-          <ProductFiltersDrawer>
-            <ProductFilters collections={collections} />
-          </ProductFiltersDrawer>
-          <RefinementList sortBy={sortBy || 'created_at'} />
+          <ActiveProductFilters
+            countryCode={countryCode}
+            currentCategory={category}
+            collectionsOptions={collections}
+          />
         </Box>
-        <ActiveProductFilters
-          countryCode={countryCode}
-          currentCategory={category}
-          collectionsOptions={collections}
-        />
-      </Box>
-      <Suspense fallback={<SkeletonProductGrid />}>
-        <PaginatedProducts
-          sortBy={sort}
-          page={pageNumber}
-          countryCode={countryCode}
-        />
-      </Suspense>
-    </Container>
+        <Suspense fallback={<SkeletonProductGrid />}>
+          <PaginatedProducts
+            sortBy={sort}
+            page={pageNumber}
+            countryCode={countryCode}
+          />
+        </Suspense>
+      </Container>
+      <ProductCarousel
+        products={recommendedProducts}
+        title="Recommended products"
+      />
+    </>
   )
 }

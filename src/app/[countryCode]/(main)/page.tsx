@@ -16,7 +16,7 @@ import { Banner } from '@modules/home/components/banner'
 import Collections from '@modules/home/components/collections'
 import { ExploreBlog } from '@modules/home/components/explore-blog'
 import Hero from '@modules/home/components/hero'
-import { OurBestsellers } from '@modules/home/components/our-bestsellers'
+import { ProductCarousel } from '@modules/products/components/product-carousel'
 
 export const metadata: Metadata = {
   title: 'Medusa Next.js Starter Template',
@@ -65,7 +65,14 @@ export default async function Home({
         cmsCollections={strapiCollections}
         medusaCollections={collectionsList}
       />
-      <OurBestsellers products={products} />
+      <ProductCarousel
+        products={products}
+        title="Our bestsellers"
+        viewAll={{
+          link: '/shop',
+          text: 'View all',
+        }}
+      />
       <Banner data={MidBanner} />
       <ExploreBlog posts={posts} />
     </>
