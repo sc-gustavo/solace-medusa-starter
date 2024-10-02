@@ -2,7 +2,7 @@ import { login } from '@lib/data/customer'
 import { LOGIN_VIEW } from '@modules/account/templates/login-template'
 import ErrorMessage from '@modules/checkout/components/error-message'
 import { SubmitButton } from '@modules/checkout/components/submit-button'
-import Input from '@modules/common/components/input'
+import { Input } from '@modules/common/components/input'
 import { useFormState } from 'react-dom'
 
 type Props = {
@@ -24,7 +24,6 @@ const Login = ({ setCurrentView }: Props) => {
       <form className="w-full" action={formAction}>
         <div className="flex w-full flex-col gap-y-2">
           <Input
-            label="Email"
             name="email"
             type="email"
             title="Enter a valid email address."
@@ -33,7 +32,6 @@ const Login = ({ setCurrentView }: Props) => {
             data-testid="email-input"
           />
           <Input
-            label="Password"
             name="password"
             type="password"
             autoComplete="current-password"

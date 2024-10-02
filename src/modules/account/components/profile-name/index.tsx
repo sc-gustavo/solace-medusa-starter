@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 
 import { updateCustomer } from '@lib/data/customer'
 import { HttpTypes } from '@medusajs/types'
-import Input from '@modules/common/components/input'
+import { Input } from '@modules/common/components/input'
 import { useFormState } from 'react-dom'
 
 import AccountInfo from '../account-info'
@@ -58,14 +58,12 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
       >
         <div className="grid grid-cols-2 gap-x-4">
           <Input
-            label="First name"
             name="first_name"
             required
             defaultValue={customer.first_name ?? ''}
             data-testid="first-name-input"
           />
           <Input
-            label="Last name"
             name="last_name"
             required
             defaultValue={customer.last_name ?? ''}

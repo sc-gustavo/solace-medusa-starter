@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 
 import { updateCustomer } from '@lib/data/customer'
 import { HttpTypes } from '@medusajs/types'
-import Input from '@modules/common/components/input'
+import { Input } from '@modules/common/components/input'
 import { useFormState } from 'react-dom'
 
 import AccountInfo from '../account-info'
@@ -58,7 +58,6 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
       >
         <div className="grid grid-cols-1 gap-y-2">
           <Input
-            label="Phone"
             name="phone"
             type="phone"
             autoComplete="phone"
