@@ -4,6 +4,7 @@ import repeat from '@lib/util/repeat'
 import { HttpTypes } from '@medusajs/types'
 import { clx, Table } from '@medusajs/ui'
 import Item from '@modules/cart/components/item'
+import { Box } from '@modules/common/components/box'
 import SkeletonLineItem from '@modules/skeletons/components/skeleton-line-item'
 
 type ItemsTemplateProps = {
@@ -14,14 +15,17 @@ const ItemsPreviewTemplate = ({ items }: ItemsTemplateProps) => {
   const hasOverflow = items && items.length > 4
 
   return (
-    <div
+    <Box
       className={clx({
         'no-scrollbar max-h-[420px] overflow-x-hidden overflow-y-scroll pl-[1px]':
           hasOverflow,
       })}
     >
       <Table>
-        <Table.Body data-testid="items-table">
+        <Table.Body
+          data-testid="items-table"
+          className="flex flex-col gap-y-2 border-none"
+        >
           {items
             ? items
                 .sort((a, b) => {
@@ -35,7 +39,7 @@ const ItemsPreviewTemplate = ({ items }: ItemsTemplateProps) => {
               })}
         </Table.Body>
       </Table>
-    </div>
+    </Box>
   )
 }
 

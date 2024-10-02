@@ -1,8 +1,10 @@
+import React from 'react'
+
+import { cn } from '@lib/util/cn'
 import { getPercentageDiff } from '@lib/util/get-precentage-diff'
 import { getPricesForVariant } from '@lib/util/get-product-price'
 import { convertToLocale } from '@lib/util/money'
 import { HttpTypes } from '@medusajs/types'
-import { clx } from '@medusajs/ui'
 
 import { Text } from '../text'
 
@@ -32,11 +34,11 @@ const LineItemPrice = ({
   return (
     <div className="flex flex-col items-end gap-x-2 text-basic-primary">
       <div
-        className={clx(
-          'flex flex-row-reverse gap-2',
+        className={cn(
+          'flex flex-row-reverse items-center gap-2',
           isInCartDropdown
             ? 'small:flex-row-reverse'
-            : 'small:flex-col small:gap-0'
+            : 'small:flex-col small:items-end small:gap-0'
         )}
       >
         {hasReducedPrice && (
