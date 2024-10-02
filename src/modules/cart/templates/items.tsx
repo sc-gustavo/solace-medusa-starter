@@ -1,3 +1,5 @@
+import React from 'react'
+
 import repeat from '@lib/util/repeat'
 import { HttpTypes } from '@medusajs/types'
 import Item from '@modules/cart/components/item'

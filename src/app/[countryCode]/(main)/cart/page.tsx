@@ -2,7 +2,9 @@ import { Metadata } from 'next'
 
 import { enrichLineItems, retrieveCart } from '@lib/data/cart'
 import { getCustomer } from '@lib/data/customer'
+import { getProductsList } from '@lib/data/products'
 import CartTemplate from '@modules/cart/templates'
+import { ProductCarousel } from '@modules/products/components/product-carousel'
 
 export const metadata: Metadata = {
   title: 'Cart',
@@ -24,8 +26,27 @@ const fetchCart = async () => {
   return cart
 }
 
-export default async function Cart() {
+export default async function Cart({
+  params: { countryCode },
+}: {
+  params: { countryCode: string }
+}) {
   const cart = await fetchCart()
   const customer = await getCustomer()
-  return <CartTemplate cart={cart} customer={customer} />
+  const {
+    response: { products },
+  } = await getProductsList({
+    pageParam: 0,
+    queryParams: {
+      limit: 9,
+    },
+    countryCode,
+  })
+
+  return (
+    <>
+      <CartTemplate cart={cart} customer={customer} />
+      <ProductCarousel products={products} title="You may also like" />
+    </>
+  )
 }
