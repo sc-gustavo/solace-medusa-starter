@@ -45,7 +45,7 @@ const LineItemPrice = ({
     >
       {hasReducedPrice && (
         <>
-          <p>
+          <div>
             {style === 'default' && (
               <span className="text-basic-primary">Original: </span>
             )}
@@ -59,7 +59,7 @@ const LineItemPrice = ({
                 currency_code,
               })}
             </Text>
-          </p>
+          </div>
           {style === 'default' && (
             <span className="text-ui-fg-interactive">
               -{getPercentageDiff(originalPrice, currentPrice || 0)}%
