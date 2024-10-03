@@ -23,6 +23,8 @@ import {
 } from '@modules/common/icons'
 import { useFormState } from 'react-dom'
 
+import { SubmitButton } from '../submit-button'
+
 type DiscountCodeProps = {
   cart: HttpTypes.StoreCart & {
     promotions: HttpTypes.StorePromotion[]
@@ -30,35 +32,46 @@ type DiscountCodeProps = {
 }
 
 const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
-  const [message] = useFormState(submitPromotionForm, null)
   const [codeValue, setCodeValue] = React.useState('')
+  const [errorMessage, setErrorMessage] = React.useState('')
   const { promotions = [] } = cart
 
   const removePromotionCode = async (code: string) => {
     const validPromotions = promotions.filter(
       (promotion) => promotion.code !== code
     )
-
     await applyPromotions(
-      validPromotions.filter((p) => p.code === undefined).map((p) => p.code!)
+      validPromotions.filter((p) => p.code !== undefined).map((p) => p.code!)
     )
+    setErrorMessage('')
   }
   const addPromotionCode = async (formData: FormData) => {
+    setErrorMessage('')
     const code = formData.get('code')
     if (!code) {
+      setErrorMessage('Please enter code')
       return
     }
     const codes = promotions
-      .filter((p) => p.code === undefined)
+      .filter((p) => p.code !== undefined)
       .map((p) => p.code!)
     codes.push(typeof code === 'string' ? code : JSON.stringify(code))
+
     await applyPromotions(codes)
+
     if (codeValue) {
       setCodeValue('')
     }
   }
+
+  const [message] = useFormState(submitPromotionForm, null)
+
   return (
-    <form action={(a) => addPromotionCode(a)}>
+    <form
+      action={(a) => {
+        addPromotionCode(a)
+      }}
+    >
       <MenuRoot className="bg-primary">
         {({ open }) => (
           <Menu className="p-2">
@@ -82,8 +95,11 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                 {promotions.length > 0 &&
                   promotions.map((promotion) => {
                     return (
-                      <div className="flex justify-between" key={promotion.id}>
-                        <div className="flex gap-2 pt-2">
+                      <div
+                        className="flex items-center justify-between"
+                        key={promotion.id}
+                      >
+                        <div className="flex gap-2">
                           <CheckCircleIcon className="text-positive" />
                           <Label className="text-md uppercase text-positive">
                             {promotion.code}
@@ -97,7 +113,6 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                             if (!promotion.code) {
                               return
                             }
-
                             removePromotionCode(promotion.code)
                           }}
                           className="bg-transparent hover:bg-transparent"
@@ -112,22 +127,16 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                     <Box className="w-3/4">
                       <Input
                         name="code"
+                        error={errorMessage || message}
                         placeholder="Enter promo code"
                         value={codeValue}
                         onChange={(e) => setCodeValue(e.target.value)}
                       />
                     </Box>
-                    <Box className="w-1/4">
-                      <Button variant="tonal" type="submit" className="w-full">
-                        Activate
-                      </Button>
+                    <Box className="flex w-1/4 justify-center">
+                      <SubmitButton variant="tonal">Activate</SubmitButton>
                     </Box>
                   </Box>
-                  {message && (
-                    <Box className="text-sm text-ui-fg-error">
-                      <span>{message}</span>
-                    </Box>
-                  )}
                 </div>
               </Box>
             </MenuContent>
