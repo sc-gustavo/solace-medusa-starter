@@ -36,7 +36,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         <ProductBreadcrumbs product={product} countryCode={countryCode} />
         <Box className="relative flex flex-col gap-y-6 small:items-start large:flex-row large:gap-x-16 xl:gap-x-[120px]">
           <div className="relative block w-full">
-            <ImageGallery images={product?.images || []} />
+            <ImageGallery
+              images={product?.images || []}
+              title={product.title}
+            />
           </div>
           <div className="flex w-full flex-col gap-y-6 py-8 small:sticky small:top-24 small:max-w-[440px] small:py-0">
             <ProductInfo product={product} />

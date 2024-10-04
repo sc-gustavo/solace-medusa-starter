@@ -4,14 +4,15 @@ import { cn } from '@lib/util/cn'
 import { HttpTypes } from '@medusajs/types'
 
 import { MAX_INITIAL_IMAGES } from './consts'
-import { GalleryOpenButton } from './gallery-open-button'
+import { GalleryDialog } from './gallery-dialog'
 import ImageCarousel from './image-carousel'
 
 type ImageGalleryProps = {
   images: HttpTypes.StoreProductImage[]
+  title: string
 }
 
-const ImageGallery = ({ images }: ImageGalleryProps) => {
+const ImageGallery = ({ images, title }: ImageGalleryProps) => {
   return (
     <div className="flex flex-col justify-center gap-4">
       <div className="hidden grid-cols-2 gap-1 medium:grid">
@@ -37,7 +38,11 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
         ))}
       </div>
 
-      <GalleryOpenButton totalImages={images.length} />
+      <GalleryDialog
+        // images={images.slice(MAX_INITIAL_IMAGES, 10)}
+        images={[...images, ...images, ...images].slice(MAX_INITIAL_IMAGES, 10)}
+        title={title}
+      />
       <ImageCarousel images={images} />
     </div>
   )
