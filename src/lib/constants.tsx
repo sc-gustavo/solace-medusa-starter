@@ -116,7 +116,7 @@ export const createNavigation = (
   },
   {
     name: 'About Us',
-    handle: '/',
+    handle: '/about-us',
     category_children: null,
   },
 ]

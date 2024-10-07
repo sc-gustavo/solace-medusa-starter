@@ -1,4 +1,5 @@
 import {
+  AboutUsData,
   BlogData,
   CollectionsData,
   HeroBannerData,
@@ -75,6 +76,18 @@ export const getProductVariantsColors = async (): Promise<VariantColorData> => {
     `/api/product-variants-colors?populate[1]=Type&populate[2]=Type.Image&pagination[start]=0&pagination[limit]=100`,
     {
       next: { tags: ['variants-colors'] },
+    }
+  )
+
+  return res.json()
+}
+
+// About Us
+export const getAbutUs = async (): Promise<AboutUsData> => {
+  const res = await fetchStrapiClient(
+    `/api/about-us?populate[1]=Banner&populate[2]=OurStory.Image&populate[3]=OurCraftsmanship.Image&populate[4]=WhyUs.Tile.Image&populate[5]=Numbers`,
+    {
+      next: { tags: ['about-us'] },
     }
   )
 
