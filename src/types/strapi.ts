@@ -96,7 +96,7 @@ export type ContentAttributes = {
 export type WhyUsAttributes = {
   id: number
   Title: string
-  Tile: StrapiPhotoAttributes[]
+  Tile: ContentAttributes[]
 }
 
 export type AboutUs = {
