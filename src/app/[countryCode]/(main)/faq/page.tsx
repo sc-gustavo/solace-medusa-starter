@@ -16,7 +16,7 @@ export default async function FAQPage() {
   } = await getFAQ()
 
   return (
-    <Container className="max-w-full bg-secondary px-0 py-0 small:px-0 small:py-0">
+    <Container className="!p max-w-full bg-secondary !p-0">
       <Container className="flex flex-col gap-10">
         {FAQSection.map((section, id) => (
           <FAQAccordion key={id} data={section} />
