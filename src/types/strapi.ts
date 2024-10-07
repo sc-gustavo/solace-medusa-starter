@@ -85,3 +85,34 @@ export type VariantColor = {
 export type VariantColorData = {
   data: VariantColor[]
 }
+
+export type ContentAttributes = {
+  id: number
+  Title: string
+  Text: string
+  Image: StrapiPhotoAttributes
+}
+
+export type WhyUsAttributes = {
+  id: number
+  Title: string
+  Tile: StrapiPhotoAttributes[]
+}
+
+export type AboutUs = {
+  id: number
+  documentId: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  locale: string
+  Banner: StrapiPhotoAttributes[]
+  OurStory: ContentAttributes
+  WhyUs: WhyUsAttributes
+  OurCraftsmanship: ContentAttributes
+  Numbers: Omit<ContentAttributes, 'Image'>
+}
+
+export type AboutUsData = {
+  data: AboutUs
+}
