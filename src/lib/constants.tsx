@@ -177,7 +177,7 @@ export const createFooterNavigation = (
         links: [
           {
             title: 'FAQs',
-            href: '#',
+            href: '/faq',
           },
           {
             title: 'Support center',

@@ -58,7 +58,7 @@ export default function ProductTabs({ product }: ProductTabsProps) {
             <AccordionItem
               key={id}
               value={`item-${id}`}
-              className="!rounded-none !border-b !border-l-0 !border-r-0 !border-t-0 border-basic-primary"
+              className="border-basic-primary"
             >
               <AccordionTrigger className="!rounded-none !py-2 transition-all duration-200 ease-in-out [&[data-state=closed]>#minusIconSvg]:hidden [&[data-state=open]>#plusIconSvg]:hidden">
                 <Heading

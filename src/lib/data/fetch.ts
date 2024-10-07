@@ -2,6 +2,7 @@ import {
   AboutUsData,
   BlogData,
   CollectionsData,
+  FAQData,
   HeroBannerData,
   MidBannerData,
   VariantColorData,
@@ -88,6 +89,18 @@ export const getAboutUs = async (): Promise<AboutUsData> => {
     `/api/about-us?populate[1]=Banner&populate[2]=OurStory.Image&populate[3]=OurCraftsmanship.Image&populate[4]=WhyUs.Tile.Image&populate[5]=Numbers`,
     {
       next: { tags: ['about-us'] },
+    }
+  )
+
+  return res.json()
+}
+
+// FAQ
+export const getFAQ = async (): Promise<FAQData> => {
+  const res = await fetchStrapiClient(
+    `/api/faq?populate[1]=FAQSection&populate[2]=FAQSection.Question`,
+    {
+      next: { tags: ['faq'] },
     }
   )
 

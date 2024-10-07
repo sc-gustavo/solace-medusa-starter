@@ -116,3 +116,24 @@ export type AboutUs = {
 export type AboutUsData = {
   data: AboutUs
 }
+
+export type Question = {
+  id: number
+  Title: string
+  Text: string
+}
+
+export type FAQSection = {
+  id: number
+  Title: string
+  Question: Question[]
+  Bookmark: string
+}
+
+export type FAQ = {
+  FAQSection: FAQSection[]
+}
+
+export type FAQData = {
+  data: FAQ
+}

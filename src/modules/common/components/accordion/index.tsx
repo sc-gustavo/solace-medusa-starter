@@ -10,14 +10,7 @@ export const AccordionItem = forwardRef<
   React.ComponentPropsWithoutRef<typeof RadixAccordion.Item>
 >(({ className, children, ...props }, forwardedRef) => {
   return (
-    <RadixAccordion.Item
-      ref={forwardedRef}
-      className={cn(
-        className,
-        'rounded-[20px] border-[.5px] border-basic-primary bg-transparent'
-      )}
-      {...props}
-    >
+    <RadixAccordion.Item ref={forwardedRef} className={className} {...props}>
       {children}
     </RadixAccordion.Item>
   )
