@@ -110,7 +110,7 @@ export type AboutUs = {
   OurStory: ContentAttributes
   WhyUs: WhyUsAttributes
   OurCraftsmanship: ContentAttributes
-  Numbers: Omit<ContentAttributes, 'Image'>
+  Numbers: Omit<ContentAttributes, 'Image'>[]
 }
 
 export type AboutUsData = {
