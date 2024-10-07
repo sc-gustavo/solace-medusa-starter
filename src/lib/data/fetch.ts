@@ -83,7 +83,7 @@ export const getProductVariantsColors = async (): Promise<VariantColorData> => {
 }
 
 // About Us
-export const getAbutUs = async (): Promise<AboutUsData> => {
+export const getAboutUs = async (): Promise<AboutUsData> => {
   const res = await fetchStrapiClient(
     `/api/about-us?populate[1]=Banner&populate[2]=OurStory.Image&populate[3]=OurCraftsmanship.Image&populate[4]=WhyUs.Tile.Image&populate[5]=Numbers`,
     {

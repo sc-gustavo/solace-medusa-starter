@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { getAbutUs } from '@lib/data/fetch'
+import { getAboutUs } from '@lib/data/fetch'
 import { Banner } from '@modules/content/components/banner'
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default async function AboutUsPage() {
   const {
     data: { Banner: bannerData, OurStory, WhyUs, OurCraftsmanship, Numbers },
-  } = await getAbutUs()
+  } = await getAboutUs()
 
   return <>{bannerData && <Banner data={bannerData} />}</>
 }
