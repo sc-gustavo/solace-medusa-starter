@@ -3,9 +3,9 @@ import { Metadata } from 'next'
 import { getAboutUs, getExploreBlogData } from '@lib/data/fetch'
 import { Banner } from '@modules/content/components/banner'
 import { BasicContentSection } from '@modules/content/components/basic-content-section'
+import { FramedTextSection } from '@modules/content/components/framed-text-section'
 import { NumericalSection } from '@modules/content/components/numerical-section'
 import { ExploreBlog } from '@modules/home/components/explore-blog'
-import { FramedTextSection } from '@modules/content/components/framed-text-section'
 
 export const metadata: Metadata = {
   title: 'About Us',
