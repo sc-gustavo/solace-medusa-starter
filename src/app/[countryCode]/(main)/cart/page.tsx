@@ -45,7 +45,7 @@ export default async function Cart({
   })
 
   return (
-    <Container className="max-w-full bg-secondary px-0 py-0 small:px-0 small:py-0">
+    <Container className="max-w-full bg-secondary !p-0">
       <CartTemplate cart={cart} customer={customer} />
       <ProductCarousel products={products} title="You may also like" />
     </Container>
