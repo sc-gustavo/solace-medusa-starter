@@ -14,9 +14,5 @@ export default async function AboutUsPage() {
     data: { Banner: bannerData, OurStory, WhyUs, OurCraftsmanship, Numbers },
   } = await getAbutUs()
 
-  return (
-    <>
-      <Banner data={bannerData} />
-    </>
-  )
+  return <>{bannerData && <Banner data={bannerData} />}</>
 }
