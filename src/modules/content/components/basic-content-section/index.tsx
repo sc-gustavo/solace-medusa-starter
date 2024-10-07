@@ -10,10 +10,7 @@ export const BasicContentSection = ({ data }: { data: ContentAttributes }) => {
   return (
     <Container className="flex flex-col justify-between large:flex-row">
       <Box className="mb-6 shrink large:mb-0 large:mr-12 large:max-w-[539px]">
-        <Heading
-          className="mb-4 text-2xl text-basic-primary small:text-3xl"
-          as="h3"
-        >
+        <Heading className="mb-4 text-2xl text-basic-primary small:text-3xl">
           {data.Title}
         </Heading>
         <Text size="lg" className="text-secondary">

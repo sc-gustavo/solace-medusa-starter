@@ -5,6 +5,7 @@ import { Banner } from '@modules/content/components/banner'
 import { BasicContentSection } from '@modules/content/components/basic-content-section'
 import { NumericalSection } from '@modules/content/components/numerical-section'
 import { ExploreBlog } from '@modules/home/components/explore-blog'
+import { FramedTextSection } from '@modules/content/components/framed-text-section'
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -23,6 +24,7 @@ export default async function AboutUsPage() {
     <>
       {bannerData && <Banner data={bannerData} />}
       {OurStory && <BasicContentSection data={OurStory} />}
+      {WhyUs && <FramedTextSection data={WhyUs} />}
       {OurCraftsmanship && <BasicContentSection data={OurCraftsmanship} />}
       {Numbers && <NumericalSection data={Numbers} />}
       <ExploreBlog posts={posts} />
