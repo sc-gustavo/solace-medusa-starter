@@ -46,7 +46,7 @@ export const GalleryDialog = ({
     }
   }, [])
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({
+  const [emblaRef] = useEmblaCarousel({
     skipSnaps: false,
     align: 'start',
     loop: false,
