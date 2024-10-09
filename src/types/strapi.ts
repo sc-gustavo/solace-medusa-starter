@@ -69,3 +69,81 @@ export type Collection = {
 export type CollectionsData = {
   data: Collection[]
 }
+
+export type VariantColor = {
+  id: number
+  Name: string
+  Type: {
+    Color?: string
+    Image?: {
+      url: string
+      alternativeText?: string
+    }
+  }[]
+}
+
+export type VariantColorData = {
+  data: VariantColor[]
+}
+
+export type ContentAttributes = {
+  id: number
+  Title: string
+  Text: string
+  Image: StrapiPhotoAttributes
+}
+
+export type WhyUsAttributes = {
+  id: number
+  Title: string
+  Tile: ContentAttributes[]
+}
+
+export type AboutUs = {
+  id: number
+  documentId: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  locale: string
+  Banner: StrapiPhotoAttributes[]
+  OurStory: ContentAttributes
+  WhyUs: WhyUsAttributes
+  OurCraftsmanship: ContentAttributes
+  Numbers: Omit<ContentAttributes, 'Image'>[]
+}
+
+export type AboutUsData = {
+  data: AboutUs
+}
+
+export type Question = {
+  id: number
+  Title: string
+  Text: string
+}
+
+export type FAQSection = {
+  id: number
+  Title: string
+  Question: Question[]
+  Bookmark: string
+}
+
+export type FAQ = {
+  FAQSection: FAQSection[]
+}
+
+export type FAQData = {
+  data: FAQ
+}
+
+export type ContentPage = {
+  id: number
+  documentId: string
+  PageContent: string
+}
+
+export type ContentPageData = {
+  data: ContentPage
+}

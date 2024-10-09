@@ -20,7 +20,7 @@ export const getProductsById = cache(async function ({
         id: ids,
         region_id: regionId,
         fields:
-          '*variants.calculated_price,+variants.inventory_quantity,*variants,*variants.prices,*categories',
+          '*variants.calculated_price,+variants.inventory_quantity,*variants,*variants.prices,*categories,+metadata',
       },
       { next: { tags: ['products'] } }
     )
@@ -37,7 +37,7 @@ export const getProductByHandle = cache(async function (
         handle,
         region_id: regionId,
         fields:
-          '*variants.calculated_price,+variants.inventory_quantity,*variants,*variants.prices,*categories',
+          '*variants.calculated_price,+variants.inventory_quantity,*variants,*variants.prices,*categories,+metadata',
       },
       { next: { tags: ['products'] } }
     )
@@ -141,4 +141,58 @@ export const getProductsListWithSort = cache(async function ({
     nextPage,
     queryParams,
   }
+})
+
+export const getProductsListByCollectionId = cache(async function ({
+  collectionId,
+  countryCode,
+  excludeProductId,
+  limit = 12,
+  offset = 0,
+}: {
+  collectionId: string
+  countryCode: string
+  excludeProductId?: string
+  limit?: number
+  offset?: number
+}): Promise<{
+  response: { products: HttpTypes.StoreProduct[]; count: number }
+  nextPage: number | null
+}> {
+  const region = await getRegion(countryCode)
+
+  if (!region) {
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+    }
+  }
+
+  return sdk.store.product
+    .list(
+      {
+        limit,
+        offset,
+        collection_id: [collectionId],
+        region_id: region.id,
+        fields:
+          '*variants.calculated_price,+variants.inventory_quantity,*variants,*variants.prices',
+      },
+      { next: { tags: ['products'] } }
+    )
+    .then(({ products, count }) => {
+      if (excludeProductId) {
+        products = products.filter((product) => product.id !== excludeProductId)
+      }
+
+      const nextPage = count > offset + limit ? offset + limit : null
+
+      return {
+        response: {
+          products,
+          count,
+        },
+        nextPage,
+      }
+    })
 })
