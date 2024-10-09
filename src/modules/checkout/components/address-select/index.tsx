@@ -66,7 +66,10 @@ const AddressSelect: React.FC<AddressSelectProps> = ({
       </DialogTrigger>
       <DialogPortal>
         <DialogOverlay />
-        <DialogContent className="!rounded-none" aria-describedby={undefined}>
+        <DialogContent
+          className="max-h-full max-w-[600px] !rounded-none small:max-h-[654px]"
+          aria-describedby={undefined}
+        >
           <DialogHeader className="flex items-center gap-4 text-xl text-basic-primary small:text-2xl">
             {addNewAddress && (
               <Button
@@ -85,7 +88,7 @@ const AddressSelect: React.FC<AddressSelectProps> = ({
                 ? 'Edit shipping address'
                 : 'Select shipping address'}
           </DialogHeader>
-          <DialogBody className="flex flex-col gap-6">
+          <DialogBody className="flex flex-col gap-6 overflow-y-auto small:p-5">
             {addNewAddress ? (
               <NewAddressForm
                 ref={formRef}
@@ -120,7 +123,7 @@ const AddressSelect: React.FC<AddressSelectProps> = ({
               Save
             </Button>
           </DialogFooter>
-          <DialogClose />
+          <DialogClose className="right-4 top-2.5 small:right-4 small:top-4" />
         </DialogContent>
       </DialogPortal>
     </Dialog>
