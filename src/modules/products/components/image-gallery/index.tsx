@@ -42,7 +42,7 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
               <Image
                 src={image.url}
                 priority
-                alt={`Product image`}
+                alt={`${title} - Product image`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 992px) 780px"
                 className="cursor-pointer object-cover"
