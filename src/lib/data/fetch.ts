@@ -2,6 +2,7 @@ import {
   AboutUsData,
   BlogData,
   CollectionsData,
+  ContentPageData,
   FAQData,
   HeroBannerData,
   MidBannerData,
@@ -103,6 +104,18 @@ export const getFAQ = async (): Promise<FAQData> => {
       next: { tags: ['faq'] },
     }
   )
+
+  return res.json()
+}
+
+// Content Page
+export const getContentPage = async (
+  type: string,
+  tag: string
+): Promise<ContentPageData> => {
+  const res = await fetchStrapiClient(`/api/${type}?populate=*`, {
+    next: { tags: [tag] },
+  })
 
   return res.json()
 }

@@ -197,11 +197,11 @@ export const createFooterNavigation = (
     other: [
       {
         title: 'Privacy Policy',
-        href: '#',
+        href: '/privacy-policy',
       },
       {
         title: 'Terms & Conditions',
-        href: '#',
+        href: '/terms-and-conditions',
       },
     ],
   }
@@ -210,10 +210,10 @@ export const createFooterNavigation = (
 export const checkoutFooterNavigation = [
   {
     title: 'Privacy Policy',
-    href: '#',
+    href: '/privacy-policy',
   },
   {
     title: 'Terms & Conditions',
-    href: '#',
+    href: '/terms-and-conditions',
   },
 ]

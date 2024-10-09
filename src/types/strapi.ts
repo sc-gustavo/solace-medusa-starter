@@ -137,3 +137,13 @@ export type FAQ = {
 export type FAQData = {
   data: FAQ
 }
+
+export type ContentPage = {
+  id: number
+  documentId: string
+  PageContent: string
+}
+
+export type ContentPageData = {
+  data: ContentPage
+}
