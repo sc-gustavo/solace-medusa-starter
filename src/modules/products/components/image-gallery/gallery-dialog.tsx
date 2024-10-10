@@ -15,7 +15,7 @@ import {
   DialogPortal,
   DialogTitle,
 } from '@modules/common/components/dialog'
-import { Heading } from '@modules/common/components/heading'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 
 type GalleryDialogProps = {
@@ -65,12 +65,13 @@ export const GalleryDialog = ({
         <DialogPortal>
           <DialogOverlay />
           <DialogContent aria-describedby={undefined}>
-            <DialogTitle className="hidden">Product Gallery Modal</DialogTitle>
-            <DialogHeader className="small:hidden">
-              <Heading as="h3" className="text-xl text-basic-primary">
-                {title}
-              </Heading>
+            <DialogHeader className="flex items-center text-xl text-basic-primary small:hidden">
+              {title}
+              <DialogClose className="right-4" />
             </DialogHeader>
+            <VisuallyHidden.Root>
+              <DialogTitle>Product Gallery Modal</DialogTitle>
+            </VisuallyHidden.Root>
             <DialogBody className="mx-auto flex max-w-[1440px] flex-col items-center justify-center gap-4 p-4 small:gap-20 small:px-14 small:py-[31px] large:flex-row large:justify-normal">
               <div
                 ref={images.length < 4 ? null : emblaRef}
@@ -119,7 +120,7 @@ export const GalleryDialog = ({
                 />
               </Box>
             </DialogBody>
-            <DialogClose className="right-3 top-3 large:right-14 large:top-[31px]" />
+            <DialogClose className="right-14 top-[31px] hidden small:block" />
           </DialogContent>
         </DialogPortal>
       </Dialog>

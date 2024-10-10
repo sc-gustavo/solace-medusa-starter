@@ -96,7 +96,7 @@ export function DialogHeader({
     <div
       className={cn(
         className,
-        'w-full border-b-[.5px] border-basic-primary p-5 pr-16'
+        'relative w-full border-b-[.5px] border-basic-primary p-5 pr-16'
       )}
       {...props}
     >
