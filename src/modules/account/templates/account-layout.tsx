@@ -2,7 +2,6 @@ import React from 'react'
 
 import { HttpTypes } from '@medusajs/types'
 import { Container } from '@modules/common/components/container'
-import UnderlineLink from '@modules/common/components/interactive-link'
 
 import AccountNav from '../components/account-nav'
 import AccountMobileNav from '../components/account-nav/account-mobile-nav'
