@@ -15,7 +15,6 @@ import {
   DialogPortal,
   DialogTitle,
 } from '@modules/common/components/dialog'
-import { Heading } from '@modules/common/components/heading'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 
