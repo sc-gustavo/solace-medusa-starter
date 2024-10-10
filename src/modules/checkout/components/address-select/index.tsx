@@ -12,9 +12,11 @@ import {
   DialogHeader,
   DialogOverlay,
   DialogPortal,
+  DialogTitle,
   DialogTrigger,
 } from '@modules/common/components/dialog'
 import { ArrowLeftIcon } from '@modules/common/icons'
+import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 
 import EditAddressForm from '../edit-address-form'
 import NewAddressForm from '../new-address-form'
@@ -87,8 +89,12 @@ const AddressSelect: React.FC<AddressSelectProps> = ({
               : editAddress
                 ? 'Edit shipping address'
                 : 'Select shipping address'}
+            <DialogClose className="right-4" />
           </DialogHeader>
-          <DialogBody className="flex flex-col gap-6 overflow-y-auto small:p-5">
+          <VisuallyHidden.Root>
+            <DialogTitle>Select address modal</DialogTitle>
+          </VisuallyHidden.Root>
+          <DialogBody className="flex flex-col gap-6 overflow-y-auto p-4 small:p-5">
             {addNewAddress ? (
               <NewAddressForm
                 ref={formRef}
@@ -123,7 +129,6 @@ const AddressSelect: React.FC<AddressSelectProps> = ({
               Save
             </Button>
           </DialogFooter>
-          <DialogClose className="right-4 top-2.5 small:right-4 small:top-4" />
         </DialogContent>
       </DialogPortal>
     </Dialog>
