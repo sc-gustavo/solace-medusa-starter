@@ -44,7 +44,7 @@ export const rootColors = {
   /*BORDER*/
 
   '--border-basic-primary': '229 229 229',
-  '--border-secondary': '9 9 9, 0.1',
+  '--border-secondary': '255, 255, 255, 0.1',
   '--border-disabled': '140 140 140',
   '--border-action-primary': '9 9 9',
   '--border-action-primary-inverse': '255 255 255',
