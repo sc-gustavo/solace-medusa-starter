@@ -6,7 +6,7 @@ import { StrapiPhotoAttributes } from 'types/strapi'
 
 export const Banner = ({ data }: { data: StrapiPhotoAttributes[] }) => {
   return (
-    <Container className="flex flex-col gap-6 small:gap-12">
+    <Container className="flex flex-col gap-6 text-basic-primary small:gap-12">
       <Image
         src={data[0].url}
         alt={data[0].alternativeText ?? `Banner image`}
