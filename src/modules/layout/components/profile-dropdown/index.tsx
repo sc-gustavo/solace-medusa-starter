@@ -1,55 +1,37 @@
 'use client'
 
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
+import { useParams } from 'next/navigation'
 
 import { Popover, Transition } from '@headlessui/react'
+import { signout } from '@lib/data/customer'
+import AccountNavLink from '@modules/account/components/account-nav/account-nav-link'
+import { profileNavItemsGroups } from '@modules/account/components/account-nav/consts'
 import { Box } from '@modules/common/components/box'
 import { Button } from '@modules/common/components/button'
 import Divider from '@modules/common/components/divider'
 import LocalizedClientLink from '@modules/common/components/localized-client-link'
-import {
-  HeadphonesIcon,
-  MoonIcon,
-  SunIcon,
-  UserIcon,
-} from '@modules/common/icons'
+import { HeadphonesIcon, LogoutIcon, UserIcon } from '@modules/common/icons'
 
-const ProfileDropdown = () => {
+import { ThemeSwitcher } from './theme-switcher'
+
+const ProfileDropdown = ({ loggedIn }: { loggedIn: boolean }) => {
   const [cartDropdownOpen, setCartDropdownOpen] = useState(false)
-  const [preferredColorTheme, SetPreferredColorTheme] = useState('light')
 
   const open = () => setCartDropdownOpen(true)
   const close = () => setCartDropdownOpen(false)
 
-  const handleClick = () => {
-    const newColorTheme = preferredColorTheme === 'light' ? 'dark' : 'light'
-    SetPreferredColorTheme(newColorTheme)
-    document.documentElement.setAttribute('data-theme', newColorTheme)
-    localStorage.setItem('theme', newColorTheme)
-  }
+  const { countryCode } = useParams()
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      SetPreferredColorTheme(savedTheme)
-      document.documentElement.setAttribute('data-theme', savedTheme)
-    } else {
-      const userPrefersDark = window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      ).matches
-      const defaultTheme = userPrefersDark ? 'dark' : 'light'
-      SetPreferredColorTheme(defaultTheme)
-      document.documentElement.setAttribute('data-theme', defaultTheme)
-    }
-  }, [])
+  const handleLogout = async () => {
+    await signout(countryCode as string)
+  }
 
   return (
     <Box className="z-50 h-full" onMouseEnter={open} onMouseLeave={close}>
       <Popover className="relative h-full">
-        <Popover.Button className="rounded-full bg-transparent !p-2 text-action-primary hover:bg-fg-secondary-hover hover:text-action-primary-hover active:bg-fg-secondary-pressed active:text-action-primary-pressed xsmall:!p-3.5">
-          <LocalizedClientLink href="/account">
-            <UserIcon />
-          </LocalizedClientLink>
+        <Popover.Button className="cursor-default rounded-full bg-transparent !p-2 text-action-primary outline-none hover:text-action-primary-hover active:bg-fg-secondary-pressed active:text-action-primary-pressed xsmall:!p-3.5 small:hover:bg-fg-secondary-hover">
+          <UserIcon />
         </Popover.Button>
         <Transition
           show={cartDropdownOpen}
@@ -63,38 +45,81 @@ const ProfileDropdown = () => {
         >
           <Popover.Panel
             static
-            className="absolute right-0 top-[calc(100%+8px)] w-[264px] border border-action-primary bg-primary text-ui-fg-base"
+            className="absolute -right-10 top-[calc(100%+8px)] w-[264px] border border-action-primary bg-primary text-ui-fg-base small:right-0"
             data-testid="nav-cart-dropdown"
           >
-            <Box className="flex flex-col gap-2 p-2">
-              <Button size="sm" asChild>
-                <LocalizedClientLink href="/account?mode=sign-in">
-                  Sign in
-                </LocalizedClientLink>
-              </Button>
-              <Button size="sm" asChild variant="tonal">
-                <LocalizedClientLink href="/account?mode=register">
-                  Sign up
-                </LocalizedClientLink>
-              </Button>
-            </Box>
-            <Divider />
+            {loggedIn ? (
+              <>
+                {profileNavItemsGroups.slice(0, 2).map((group, groupIndex) => (
+                  <Fragment key={groupIndex}>
+                    <ul className="p-2">
+                      {group.map((item) => (
+                        <li key={item.href || item.type}>
+                          {item.type === 'logout' ? (
+                            <Button
+                              variant="text"
+                              onClick={handleLogout}
+                              className="w-full justify-start rounded-none p-0 hover:bg-hover"
+                            >
+                              <div className="flex items-center gap-2 p-4 text-lg">
+                                {item.icon}
+                                {item.label}
+                              </div>
+                            </Button>
+                          ) : (
+                            <AccountNavLink href={item.href} icon={item.icon}>
+                              {item.label}
+                            </AccountNavLink>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                    {groupIndex < profileNavItemsGroups.length - 1 && (
+                      <div className="h-px w-full bg-hover" />
+                    )}
+                  </Fragment>
+                ))}
+              </>
+            ) : (
+              <>
+                <Box className="flex flex-col gap-2 p-2">
+                  <Button size="sm" asChild>
+                    <LocalizedClientLink href="/account?mode=sign-in">
+                      Sign in
+                    </LocalizedClientLink>
+                  </Button>
+                  <Button size="sm" asChild variant="tonal">
+                    <LocalizedClientLink href="/account?mode=register">
+                      Sign up
+                    </LocalizedClientLink>
+                  </Button>
+                </Box>
+                <Divider />
+              </>
+            )}
             <Box className="p-2">
-              <Button variant="text" withIcon onClick={handleClick}>
-                {preferredColorTheme === 'dark' ? (
-                  <>
-                    <SunIcon /> Switch to light mode
-                  </>
-                ) : (
-                  <>
-                    <MoonIcon /> Switch to dark mode
-                  </>
-                )}
-              </Button>
-              <Button variant="text" withIcon>
-                <HeadphonesIcon /> Support center
-              </Button>
+              <ThemeSwitcher />
+              <AccountNavLink href="#" icon={<HeadphonesIcon />}>
+                Support center
+              </AccountNavLink>
             </Box>
+            {loggedIn && (
+              <>
+                <Divider />
+                <Box className="p-2">
+                  <Button
+                    variant="text"
+                    onClick={handleLogout}
+                    className="w-full justify-start rounded-none p-0 hover:bg-hover"
+                  >
+                    <div className="flex items-center gap-4 p-4 text-lg">
+                      <LogoutIcon />
+                      Log out
+                    </div>
+                  </Button>
+                </Box>
+              </>
+            )}
           </Popover.Panel>
         </Transition>
       </Popover>
