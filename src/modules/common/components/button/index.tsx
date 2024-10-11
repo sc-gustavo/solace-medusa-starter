@@ -96,7 +96,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <>
         {isLoading ? (
           <div
-            className="border-action-primary-inverse h-4 w-4 animate-spin rounded-full border-2 border-t-transparent"
+            className="h-4 w-4 animate-spin rounded-full border-2 border-action-primary-inverse border-t-transparent"
             data-testid="spinner"
           />
         ) : (
