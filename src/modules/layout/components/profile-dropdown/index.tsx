@@ -45,7 +45,7 @@ const ProfileDropdown = ({ loggedIn }: { loggedIn: boolean }) => {
         >
           <Popover.Panel
             static
-            className="absolute -right-10 top-[calc(100%+8px)] w-[264px] border border-action-primary bg-primary text-ui-fg-base small:right-0"
+            className="absolute -right-10 top-[calc(100%+8px)] w-[264px] border border-action-primary bg-primary text-basic-primary small:right-0"
             data-testid="nav-cart-dropdown"
           >
             {loggedIn ? (
