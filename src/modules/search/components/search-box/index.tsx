@@ -49,7 +49,7 @@ export const ControlledSearchBox = ({
   return (
     <Box {...props} className="w-full bg-primary">
       <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
-        <Box className="flex items-center justify-between border border-action-primary p-1 pr-2 small:p-2 small:pr-4">
+        <Box className="flex items-center justify-between border border-action-primary p-1 px-2 small:p-2 small:px-4">
           <Input
             ref={inputRef}
             data-testid="search-input"

@@ -43,10 +43,11 @@ export const rootColors = {
 
   /*BORDER*/
 
-  '--border-basic-primary': '237 237 237',
-  '--border-secondary': '255, 255, 255, 0.1',
+  '--border-basic-primary': '229 229 229',
+  '--border-secondary': '9 9 9, 0.1',
   '--border-disabled': '140 140 140',
   '--border-action-primary': '9 9 9',
+  '--border-action-primary-inverse': '255 255 255',
   '--border-action-primary-hover': '26 26 26',
   '--border-action-primary-pressed': '17 17 17',
   '--border-negative': '217 45 32',
@@ -98,10 +99,11 @@ export const darkMode = {
 
   /*BORDER*/
 
-  '--border-basic-primary': '70 70 70',
+  '--border-basic-primary': '33 33 33',
   '--border-secondary': '255, 255, 255, 0.1',
   '--border-disabled': '108 108 108',
-  '--border-action-primary': '14 171 39',
+  '--border-action-primary': '255 255 255',
+  '--border-action-primary-inverse': '9 9 9',
   '--border-action-primary-hover': '14 125 32',
   '--border-action-primary-pressed': '16 87 29',
   '--border-negative': '240 68 56',

@@ -36,7 +36,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }, [props.type, showPassword])
 
     return (
-      <Box className="flex flex-col gap-2">
+      <Box className="flex w-full flex-col gap-2">
         {props.label && (
           <Label
             size="sm"
@@ -50,7 +50,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         <Box
           className={cn(
-            'border-primary focus-within:ring-action-primary [.dark_&]:focus-within:ring-action-primary focus-within:ring-offset-action-primary [.dark_&]:focus-within:ring-offset-action-primary flex h-12 w-full items-center border bg-secondary px-4 py-3.5 outline-none file:border-0 file:bg-transparent file:pt-1 file:text-md file:font-medium focus-within:border focus-within:border-action-primary focus-within:ring-0 focus-within:ring-offset-0 [.dark_&:focus-within]:border-action-primary [.dark_&]:border-transparent [.dark_&]:bg-fg-tertiary',
+            'border-primary focus-within:ring-action-primary [.dark_&]:focus-within:ring-action-primary focus-within:ring-offset-action-primary [.dark_&]:focus-within:ring-offset-action-primary flex h-12 w-full items-center border bg-primary px-4 py-3.5 outline-none file:border-0 file:bg-transparent file:pt-1 file:text-md file:font-medium focus-within:border focus-within:border-action-primary focus-within:ring-0 focus-within:ring-offset-0 [.dark_&:focus-within]:border-action-primary [.dark_&]:border-transparent [.dark_&]:bg-fg-tertiary',
             {
               'cursor-not-allowed border-transparent bg-disabled text-disabled':
                 props.disabled,
@@ -66,7 +66,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={mergeRefs(localRef, forwardedRef)}
             type={inputType}
             placeholder={props.placeholder}
-            className="w-full !bg-transparent text-md outline-none placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-offset-0 [.dark_&]:placeholder:text-static"
+            className="w-full !bg-transparent text-md text-basic-primary outline-none placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-offset-0 [.dark_&]:placeholder:text-static"
             {...props}
           />
           {props.type === 'password' && (

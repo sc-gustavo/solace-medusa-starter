@@ -113,6 +113,8 @@ export const colors = {
     secondary: 'rgb(var(--border-secondary))',
     disabled: 'rgb(var(--border-disabled) / <alpha-value>)',
     'action-primary': 'rgb(var(--border-action-primary) / <alpha-value>)',
+    'action-primary-inverse':
+      'rgb(var(--border-action-primary-inverse) / <alpha-value>)',
     'action-primary-hover':
       'rgb(var(--border-action-primary-hover) / <alpha-value>)',
     'action-primary-pressed':
