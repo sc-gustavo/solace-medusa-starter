@@ -145,7 +145,7 @@ const SideMenu = (props: any) => {
           <VisuallyHidden.Root>
             <DialogTitle>Menu modal</DialogTitle>
           </VisuallyHidden.Root>
-          <DialogBody className="p-4 small:p-5">
+          <DialogBody className="overflow-y-auto p-4 small:p-5">
             <Box className="flex flex-col">
               {currentCategory && (
                 <Button
