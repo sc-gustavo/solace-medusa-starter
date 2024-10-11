@@ -4,15 +4,12 @@ import { darkMode, rootColors } from './colors'
 
 const uiPlugin = plugin(function ({ addBase, theme }) {
   addBase({
-    ':root': {
+    '.light': {
       ...rootColors,
     },
-    // TODO: uncomment when dark mode is ready
-    // '@media (prefers-color-scheme: dark)': {
-    //   ':root': {
-    //     ...darkMode,
-    //   },
-    // },
+    '.dark': {
+      ...darkMode,
+    },
     h1: {
       fontSize: theme('fontSize.5xl'),
       fontWeight: theme('fontWeight.font-normal'),

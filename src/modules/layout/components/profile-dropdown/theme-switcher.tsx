@@ -6,9 +6,10 @@ import { MoonIcon, SunIcon } from '@modules/common/icons'
 export function ThemeSwitcher() {
   const [preferredColorTheme, SetPreferredColorTheme] = useState('light')
   const handleClick = () => {
+    document.body.classList.remove(preferredColorTheme)
     const newColorTheme = preferredColorTheme === 'light' ? 'dark' : 'light'
     SetPreferredColorTheme(newColorTheme)
-    document.documentElement.setAttribute('data-theme', newColorTheme)
+    document.body.classList.add(newColorTheme)
     localStorage.setItem('theme', newColorTheme)
   }
 
@@ -16,16 +17,17 @@ export function ThemeSwitcher() {
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme) {
       SetPreferredColorTheme(savedTheme)
-      document.documentElement.setAttribute('data-theme', savedTheme)
+      document.body.classList.add(savedTheme)
     } else {
       const userPrefersDark = window.matchMedia(
         '(prefers-color-scheme: dark)'
       ).matches
       const defaultTheme = userPrefersDark ? 'dark' : 'light'
       SetPreferredColorTheme(defaultTheme)
-      document.documentElement.setAttribute('data-theme', defaultTheme)
+      document.body.classList.add(defaultTheme)
     }
   }, [])
+
   return (
     <Button
       variant="text"
