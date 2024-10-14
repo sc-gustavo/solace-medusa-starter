@@ -50,5 +50,5 @@ export { VisaIcon } from './visa'
 export { DashboardIcon } from './dashboard'
 export { ShippingIcon } from './shipping'
 export { SettingsIcon } from './settings'
-
+export { SolaceLogoBig } from './logo-solace-big'
 export { LogoutIcon } from './logout'

@@ -44,13 +44,13 @@ const CheckboxIndicator = forwardRef<
   >
     {checked === 'indeterminate' ? (
       <MinusHeavyIcon
-        className={cn('h-3.5 w-3.5 text-static', {
+        className={cn('h-3.5 w-3.5 text-inverse-primary', {
           'text-disabled': props.disabled,
         })}
       />
     ) : (
       <TickHeavyIcon
-        className={cn('h-3.5 w-3.5 text-static', {
+        className={cn('h-3.5 w-3.5 text-inverse-primary', {
           'text-disabled': props.disabled,
         })}
       />

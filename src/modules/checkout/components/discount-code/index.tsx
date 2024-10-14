@@ -5,8 +5,15 @@ import React from 'react'
 import { applyPromotions, submitPromotionForm } from '@lib/data/cart'
 import { HttpTypes } from '@medusajs/types'
 import { clx } from '@medusajs/ui'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@modules/common/components/accordion'
 import { Box } from '@modules/common/components/box'
 import { Button } from '@modules/common/components/button'
+import { Heading } from '@modules/common/components/heading'
 import { Input } from '@modules/common/components/input'
 import { Label } from '@modules/common/components/label'
 import {
@@ -72,77 +79,79 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         addPromotionCode(a)
       }}
     >
-      <MenuRoot className="bg-primary">
-        {({ open }) => (
-          <Menu className="p-2">
-            <MenuTrigger
-              label="Have promo code?"
-              icon={<DiscountIcon />}
-              className={clx('hover:bg-transparent focus:bg-transparent', {
-                'bg-transparent focus:bg-transparent': open,
-              })}
-              customArrow={
-                <ChevronDownIcon
-                  className={clx(
-                    'flex h-7 w-7 self-center transition-all duration-300 ease-in-out',
-                    { 'rotate-180': open }
-                  )}
-                />
-              }
-            />
-            <MenuContent position="bottom" className="relative mt-2">
-              <Box className="flex flex-col gap-4 px-3 pb-4">
-                {promotions.length > 0 &&
-                  promotions.map((promotion) => {
-                    return (
-                      <div
-                        className="flex items-center justify-between"
-                        key={promotion.id}
-                      >
-                        <div className="flex gap-2">
-                          <CheckCircleIcon className="text-positive" />
-                          <Label className="text-md uppercase text-positive">
-                            {promotion.code}
-                          </Label>
-                        </div>
-                        <Button
-                          variant="tonal"
-                          size="sm"
-                          withIcon
-                          onClick={() => {
-                            if (!promotion.code) {
-                              return
-                            }
-                            removePromotionCode(promotion.code)
-                          }}
-                          className="bg-transparent hover:bg-transparent"
-                        >
-                          <TrashIcon className="h-5 w-5" />
-                        </Button>
+      <Accordion
+        type="single"
+        collapsible
+        className="flex w-full flex-col gap-2"
+      >
+        <AccordionItem value={`discount`} className="bg-primary px-5 pb-3 pt-5">
+          <AccordionTrigger className="text-basic-primary [&[data-state=open]>#chevronDown]:rotate-180">
+            <Heading
+              className="flex items-center gap-2 text-left text-lg font-medium"
+              as="h3"
+            >
+              <DiscountIcon />
+              Have promo code?
+            </Heading>
+            <div
+              id="chevronDown"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-action-primary duration-300 ease-in-out"
+            >
+              <ChevronDownIcon />
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            <Box className="flex flex-col gap-4 px-3 pb-4">
+              {promotions.length > 0 &&
+                promotions.map((promotion) => {
+                  return (
+                    <div
+                      className="flex items-center justify-between"
+                      key={promotion.id}
+                    >
+                      <div className="flex gap-2">
+                        <CheckCircleIcon className="text-positive" />
+                        <Label className="text-md uppercase text-positive">
+                          {promotion.code}
+                        </Label>
                       </div>
-                    )
-                  })}
-                <div className="flex flex-col gap-2">
-                  <Box className="flex w-full justify-between gap-3">
-                    <Box className="w-3/4">
-                      <Input
-                        name="code"
-                        error={errorMessage || message}
-                        placeholder="Enter promo code"
-                        value={codeValue}
-                        onChange={(e) => setCodeValue(e.target.value)}
-                      />
-                    </Box>
-                    <Box className="flex w-1/4 justify-center">
-                      <SubmitButton variant="tonal">Activate</SubmitButton>
-                    </Box>
+                      <Button
+                        variant="tonal"
+                        size="sm"
+                        withIcon
+                        onClick={() => {
+                          if (!promotion.code) {
+                            return
+                          }
+                          removePromotionCode(promotion.code)
+                        }}
+                        className="bg-transparent hover:bg-transparent"
+                      >
+                        <TrashIcon className="h-5 w-5" />
+                      </Button>
+                    </div>
+                  )
+                })}
+              <div className="flex flex-col gap-2">
+                <Box className="flex w-full justify-between gap-3">
+                  <Box className="w-3/4">
+                    <Input
+                      name="code"
+                      error={errorMessage || message}
+                      placeholder="Enter promo code"
+                      value={codeValue}
+                      onChange={(e) => setCodeValue(e.target.value)}
+                    />
                   </Box>
-                </div>
-              </Box>
-            </MenuContent>
-          </Menu>
-        )}
-      </MenuRoot>
+                  <Box className="flex w-1/4 justify-center">
+                    <SubmitButton variant="tonal">Activate</SubmitButton>
+                  </Box>
+                </Box>
+              </div>
+            </Box>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
     </form>
   )
 }

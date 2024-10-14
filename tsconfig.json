@@ -34,7 +34,8 @@
     "next.config.js",
     ".eslintrc.cjs",
     "tailwind.config.js",
-    "postcss.config.js"
+    "postcss.config.js",
+    "src/modules/common/components/theme-provider"
   ],
   "exclude": [
     "node_modules",

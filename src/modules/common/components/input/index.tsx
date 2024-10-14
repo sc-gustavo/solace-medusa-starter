@@ -36,7 +36,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }, [type, showPassword])
 
     return (
-      <Box className="flex flex-col gap-2">
+      <Box className="flex w-full flex-col gap-2">
         {label && (
           <Label
             size="sm"
@@ -67,7 +67,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             id={name}
             ref={mergeRefs(localRef, ref)}
             placeholder={props.placeholder}
-            className="w-full !bg-transparent text-md outline-none placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-offset-0 [.dark_&]:placeholder:text-static"
+            className="w-full !bg-transparent text-md text-basic-primary outline-none placeholder:text-secondary focus-visible:ring-0 focus-visible:ring-offset-0 [.dark_&]:placeholder:text-static"
             {...props}
           />
           {type === 'password' && (

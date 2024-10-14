@@ -90,7 +90,7 @@ export const SelectTrigger = React.forwardRef<HTMLButtonElement, TriggerProps>(
         ref={ref}
         onClick={() => context.setIsOpen(!context.isOpen)}
         className={cn(
-          'border-primary flex w-full items-center justify-between gap-2 border !bg-secondary px-4 py-3 text-md focus-within:ring-0 focus-within:ring-offset-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
+          'border-primary flex w-full items-center justify-between gap-2 border !bg-secondary px-4 py-3 text-md text-basic-primary focus-within:ring-0 focus-within:ring-offset-0 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
           { 'border-negative focus:border-negative': context.error },
           { 'border-action-primary': context.isOpen },
           className

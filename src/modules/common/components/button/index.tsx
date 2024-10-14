@@ -8,10 +8,11 @@ const buttonVariants = cva({
   variants: {
     variant: {
       filled:
-        'bg-fg-primary hover:bg-fg-primary-hover active:bg-fg-primary-pressed text-static',
-      ghost: 'bg-transparent hover:bg-hover active:bg-pressed !rounded-xl !p-4',
+        'bg-fg-primary hover:bg-fg-primary-hover active:bg-fg-primary-pressed text-inverse-primary',
+      ghost:
+        'bg-transparent hover:bg-hover active:bg-pressed !rounded-xl !p-4 text-action-primary',
       tonal:
-        'bg-fg-secondary text-action-primary hover:bg-fg-secondary-hover active:bg-fg-secondary-pressed [.dark_&]:bg-fg-tertiary [.dark_&]:hover:bg-fg-tertiary-hover [.dark_&]:active:bg-fg-tertiary-pressed [.dark_&]:text-static',
+        'bg-fg-secondary text-action-primary hover:bg-fg-secondary-hover active:bg-fg-secondary-pressed [.dark_&]:bg-fg-tertiary [.dark_&]:hover:bg-fg-tertiary-hover [.dark_&]:active:bg-fg-tertiary-pressed',
       text: 'bg-transparent text-action-primary hover:text-action-primary-hover active:text-action-primary-pressed',
       destructive:
         'text-static bg-fg-primary-negative hover:bg-fg-primary-negative-hover active:bg-fg-primary-negative-pressed',
@@ -95,7 +96,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <>
         {isLoading ? (
           <div
-            className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"
+            className="h-4 w-4 animate-spin rounded-full border-2 border-action-primary-inverse border-t-transparent"
             data-testid="spinner"
           />
         ) : (

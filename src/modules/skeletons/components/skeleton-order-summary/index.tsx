@@ -6,7 +6,7 @@ const SkeletonOrderSummary = () => {
   return (
     <div className="flex w-full flex-col gap-2 large:w-[326px] xl:w-[437px]">
       <SkeletonCodeForm />
-      <div className="flex flex-col gap-5 bg-gray-50 p-5">
+      <div className="flex animate-pulse flex-col gap-5 bg-skeleton-primary p-5">
         <SkeletonCartTotals header={false} />
         <SkeletonButton />
       </div>

@@ -35,6 +35,7 @@
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
+  input:-webkit-autofill::first-line,
   textarea:-webkit-autofill,
   textarea:-webkit-autofill:hover,
   textarea:-webkit-autofill:focus,
@@ -43,6 +44,19 @@
   select:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0px 1000px transparent inset;
     transition: background-color 5000s ease-in-out 0s;
+  }
+
+  .dark input:-webkit-autofill,
+  .dark input:-webkit-autofill:hover,
+  .dark input:-webkit-autofill:focus,
+  .dark input:-webkit-autofill::first-line {
+    color: white;
+  }
+  .light input:-webkit-autofill,
+  .light input:-webkit-autofill:hover,
+  .light input:-webkit-autofill:focus,
+  .light input:-webkit-autofill::first-line {
+    color: black;
   }
 
   input[type='search']::-webkit-search-decoration,
