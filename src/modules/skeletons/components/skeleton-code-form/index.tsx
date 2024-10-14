@@ -1,9 +1,9 @@
 const SkeletonCodeForm = () => {
   return (
-    <div className="flex w-full flex-col bg-gray-50">
+    <div className="bg-skeleton-primary flex w-full animate-pulse flex-col">
       <div className="grid grid-cols-[1fr_48px] gap-x-2 p-5">
-        <div className="h-12 animate-pulse bg-gray-100"></div>
-        <div className="h-12 animate-pulse bg-gray-100"></div>
+        <div className="bg-skeleton-secondary h-12"></div>
+        <div className="bg-skeleton-secondary h-12"></div>
       </div>
     </div>
   )

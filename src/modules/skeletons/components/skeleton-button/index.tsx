@@ -1,5 +1,7 @@
 const SkeletonButton = () => {
-  return <div className="min-h-[50px] w-full bg-gray-100 px-5 py-[10px]"></div>
+  return (
+    <div className="bg-skeleton-secondary min-h-[50px] w-full px-5 py-[10px]"></div>
+  )
 }
 
 export default SkeletonButton

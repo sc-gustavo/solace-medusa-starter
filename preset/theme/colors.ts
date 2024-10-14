@@ -91,6 +91,8 @@ export const colors = {
       'rgb(var(--fg-primary-negative-pressed) / <alpha-value>)',
     'fg-secondary-negative': 'rgb(var(--fg-secondary-negative))',
     'fg-positive': 'rgb(var(--fg-positive))',
+    'skeleton-primary': 'rgb(var(--bg-skeleton-primary))',
+    'skeleton-secondary': 'rgb(var(--bg-skeleton-secondary))',
   },
   textColor: {
     static: 'rgb(var(--content-static) / <alpha-value>)',

@@ -95,7 +95,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
             </Heading>
             <div
               id="chevronDown"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-fg-secondary text-action-primary duration-300 ease-in-out hover:bg-fg-secondary-hover hover:text-action-primary-hover active:bg-fg-secondary-pressed active:text-action-primary-pressed"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-action-primary duration-300 ease-in-out"
             >
               <ChevronDownIcon />
             </div>

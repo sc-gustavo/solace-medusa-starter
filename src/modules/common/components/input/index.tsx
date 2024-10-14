@@ -37,7 +37,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <Box className="flex w-full flex-col gap-2">
-        {props.label && (
         {label && (
           <Label
             size="sm"

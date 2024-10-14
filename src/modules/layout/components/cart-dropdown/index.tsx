@@ -104,9 +104,7 @@ const CartDropdown = ({
             data-testid="nav-cart-dropdown"
           >
             <Box className="flex items-center border-b-[0.5px] border-basic-primary p-5">
-              <Heading as="h3" className="text-2xl">
-                Shopping Cart
-              </Heading>
+              <Text className="text-2xl">Shopping Cart</Text>
             </Box>
             {cartState && cartState.items?.length ? (
               <>

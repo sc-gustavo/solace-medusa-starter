@@ -8,6 +8,8 @@ export const rootColors = {
   '--bg-hover': '237 237 237',
   '--bg-pressed': '229 229 229',
   '--bg-disabled': '210 210 210',
+  '--bg-skeleton-primary': '243 244 246',
+  '--bg-skeleton-secondary': '229 231 235',
 
   /*FOREGROUND*/
 
@@ -64,6 +66,8 @@ export const darkMode = {
   '--bg-hover': '70 70 70',
   '--bg-pressed': '108 108 108',
   '--bg-disabled': '70 70 70',
+  '--bg-skeleton-primary': '44 43 42',
+  '--bg-skeleton-secondary': '11 11 11',
 
   /*FOREGROUND*/
 
