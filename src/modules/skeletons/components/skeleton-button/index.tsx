@@ -1,6 +1,6 @@
 const SkeletonButton = () => {
   return (
-    <div className="bg-skeleton-secondary min-h-[50px] w-full px-5 py-[10px]"></div>
+    <div className="min-h-[50px] w-full bg-skeleton-secondary px-5 py-[10px]"></div>
   )
 }
 
