@@ -97,7 +97,12 @@ export function ResetPassword() {
   }, [localMessage])
 
   return (
-    <Box className="flex w-full max-w-[438px] flex-col gap-6">
+    <Box
+      className={cn('flex w-full flex-col gap-6', {
+        'max-w-[438px]': passwordChanged,
+        'bg-primary p-5 small:p-4': !passwordChanged,
+      })}
+    >
       {passwordChanged && !message ? (
         <>
           <CheckCircleIcon className="mx-auto h-14 w-14" />
