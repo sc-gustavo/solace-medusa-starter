@@ -2,7 +2,14 @@ import React from 'react'
 
 import { CreditCard } from '@medusajs/icons'
 import { StoreCollection, StoreProductCategory } from '@medusajs/types'
-import { BancontactIcon, IdealIcon, PayPalIcon } from '@modules/common/icons'
+import {
+  BancontactIcon,
+  BlikIcon,
+  IdealIcon,
+  PayPalIcon,
+  Przelewy24Icon,
+  StripeIcon,
+} from '@modules/common/icons'
 
 // Product filters
 export const FILTER_KEYS = {
@@ -27,7 +34,15 @@ export const paymentInfoMap: Record<
 > = {
   pp_stripe_stripe: {
     title: 'Credit card',
-    icon: <CreditCard />,
+    icon: <StripeIcon />,
+  },
+  'pp_stripe-blik_stripe': {
+    title: 'BLIK',
+    icon: <BlikIcon size={26} />,
+  },
+  'pp_stripe-przelewy24_stripe': {
+    title: 'Przelewy24',
+    icon: <Przelewy24Icon size={34} />,
   },
   'pp_stripe-ideal_stripe': {
     title: 'iDeal',
@@ -149,15 +164,15 @@ export const createFooterNavigation = (
         links: [
           {
             title: 'Orders and delivery',
-            href: '/account/orders',
+            href: '/terms-and-conditions',
           },
           {
             title: 'Returns and refunds',
-            href: '#',
+            href: '/terms-and-conditions',
           },
           {
             title: 'Payment and pricing',
-            href: '#',
+            href: '/terms-and-conditions',
           },
         ],
       },
