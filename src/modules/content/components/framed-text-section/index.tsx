@@ -19,6 +19,7 @@ export const FramedTextSection = ({ data }: { data: WhyUsAttributes }) => {
           >
             <Box className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary">
               <Image
+                className="dark:invert"
                 src={tile.Image.url}
                 height={24}
                 width={24}

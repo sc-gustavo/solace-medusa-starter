@@ -74,7 +74,7 @@ export const darkMode = {
   '--fg-primary': '249 249 249',
   '--fg-primary-hover': '237 237 237',
   '--fg-primary-pressed': '229 229 229',
-  '--fg-secondary': '255 255 255 0.1',
+  '--fg-secondary': '255, 255, 255 ,0.1',
   '--fg-secondary-hover': '255 255 255 0.2',
   '--fg-secondary-pressed': '255 255 255 0.3',
   '--fg-tertiary': '255, 255, 255, 0.1',

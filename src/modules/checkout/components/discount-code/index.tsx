@@ -4,7 +4,6 @@ import React from 'react'
 
 import { applyPromotions, submitPromotionForm } from '@lib/data/cart'
 import { HttpTypes } from '@medusajs/types'
-import { clx } from '@medusajs/ui'
 import {
   Accordion,
   AccordionContent,
@@ -16,12 +15,6 @@ import { Button } from '@modules/common/components/button'
 import { Heading } from '@modules/common/components/heading'
 import { Input } from '@modules/common/components/input'
 import { Label } from '@modules/common/components/label'
-import {
-  Menu,
-  MenuContent,
-  MenuRoot,
-  MenuTrigger,
-} from '@modules/common/components/menu'
 import {
   CheckCircleIcon,
   ChevronDownIcon,
