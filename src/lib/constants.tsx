@@ -115,6 +115,7 @@ export const createNavigation = (
       .filter((category) => !category.parent_category)
       .map((category) => ({
         name: category.name,
+        type: 'parent_category',
         handle: `/categories/${category.handle}`,
         category_children: category.category_children.map((subCategory) => ({
           name: subCategory.name,
@@ -131,7 +132,9 @@ export const createNavigation = (
       ? null
       : collections.map((collection) => ({
           name: collection.title,
+          type: 'collection',
           handle: `/collections/${collection.handle}`,
+          handle_id: collection.handle,
           category_children: null,
         })),
   },
