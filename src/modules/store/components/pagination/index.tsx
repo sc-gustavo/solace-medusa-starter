@@ -48,7 +48,7 @@ export function Pagination({
         className={clx(
           'flex h-10 w-10 items-center justify-center text-lg text-basic-primary',
           {
-            'rounded-full border-[1px] border-black bg-fg-secondary hover:text-secondary':
+            'rounded-full border-[1px] border-action-primary bg-fg-secondary hover:text-secondary':
               isCurrent,
           }
         )}

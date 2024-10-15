@@ -20,7 +20,7 @@ export const Banner = ({ data }: { data: StrapiPhotoAttributes[] }) => {
           alt={data[1].alternativeText ?? `Banner logo`}
           height={208}
           width={1400}
-          className="h-auto w-full"
+          className="h-auto w-full dark:invert"
         />
       ) : (
         <SolaceLogoBig className="h-auto w-full" />
