@@ -10,10 +10,11 @@ import { Input } from '@modules/common/components/input'
 export const ControlledSearchBox = ({
   countryCode,
   open,
+  closeSearch,
 }: {
   countryCode: string
   open: boolean
-  close: () => void
+  closeSearch: () => void
 }) => {
   const [query, setQuery] = useState<string | undefined>('')
   const router = useRouter()
@@ -35,6 +36,8 @@ export const ControlledSearchBox = ({
       router.push(`/${countryCode}/results/${query}`)
     }
     inputRef.current.blur()
+    setQuery('')
+    closeSearch()
   }
 
   const handleReset = (event: FormEvent) => {
@@ -57,9 +60,9 @@ export const ControlledSearchBox = ({
   }
 
   return (
-    <div className="relative mx-auto w-max bg-primary">
+    <div className="relative w-full bg-primary large:mx-auto large:w-max">
       <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
-        <Box className="relative flex w-max items-center justify-between border border-action-primary large:w-[400px] xl:w-[600px]">
+        <Box className="flex w-full items-center justify-between border border-action-primary large:relative large:w-[400px] xl:w-[600px]">
           <Input
             ref={inputRef}
             data-testid="search-input"

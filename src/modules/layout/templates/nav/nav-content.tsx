@@ -8,6 +8,7 @@ import { Button } from '@modules/common/components/button'
 import LocalizedClientLink from '@modules/common/components/localized-client-link'
 import { SearchIcon, SolaceLogo } from '@modules/common/icons'
 import SideMenu from '@modules/layout/components/side-menu'
+import { SearchDialog } from '@modules/search/components/search-dialog'
 import SearchDropdown from '@modules/search/components/search-dropdown'
 
 import Navigation from './navigation'
@@ -40,6 +41,12 @@ export default function NavContent(props: any) {
           countryCode={props.countryCode}
         />
       )}
+      <SearchDialog
+        recommendedProducts={props.products}
+        countryCode={props.countryCode}
+        isOpen={isSearchOpen}
+        handleOpenDialogChange={setIsSearchOpen}
+      />
       <Box
         className={cn('relative block', {
           'medium:absolute medium:left-1/2 medium:top-1/2 medium:-translate-x-1/2 medium:-translate-y-1/2':

@@ -4,11 +4,22 @@ import LocalizedClientLink from '@modules/common/components/localized-client-lin
 import { Text } from '@modules/common/components/text'
 import Thumbnail from '@modules/products/components/thumbnail'
 
-export const RecommendedItem = ({ item }: { item: StoreProduct }) => {
+export const RecommendedItem = ({
+  handleOpenDialogChange,
+  item,
+}: {
+  item: StoreProduct
+  handleOpenDialogChange: (value: boolean) => void
+}) => {
   return (
-    <LocalizedClientLink href={`/products/${item.handle}`}>
+    <LocalizedClientLink
+      href={`/products/${item.handle}`}
+      onClick={() => {
+        handleOpenDialogChange(false)
+      }}
+    >
       <Box
-        className="flex w-full bg-primary transition-all duration-300 ease-in-out hover:bg-hover"
+        className="flex w-full bg-primary transition-all duration-300 ease-in-out large:hover:bg-hover"
         data-testid="product-row"
       >
         <div className="flex h-[90px] w-[90px]">

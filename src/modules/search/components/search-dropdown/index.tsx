@@ -32,7 +32,7 @@ export default function SearchDropdown({
   const handleMouseLeave = () => {
     const timeout = setTimeout(() => {
       setIsOpen(false)
-    }, 1000)
+    }, 500)
     setDelayClose(timeout)
   }
 
@@ -52,7 +52,7 @@ export default function SearchDropdown({
       <ControlledSearchBox
         countryCode={countryCode}
         open={isOpen}
-        close={close}
+        closeSearch={() => setIsOpen(false)}
       />
       <Box
         className={cn(
@@ -69,7 +69,7 @@ export default function SearchDropdown({
                 Search results
               </Text>
             </Box>
-            <RecentSearches />
+            <RecentSearches handleOpenDialogChange={setIsOpen} />
           </Box>
           <Box className="flex-1">
             <Box className="flex h-[62px] items-center">
@@ -81,7 +81,10 @@ export default function SearchDropdown({
               {recommendedProducts.map((item, id) => {
                 return (
                   <Fragment key={id}>
-                    <RecommendedItem item={item} />
+                    <RecommendedItem
+                      item={item}
+                      handleOpenDialogChange={setIsOpen}
+                    />
                   </Fragment>
                 )
               })}
