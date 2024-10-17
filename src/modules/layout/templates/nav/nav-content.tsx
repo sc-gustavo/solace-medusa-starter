@@ -34,9 +34,9 @@ export default function NavContent(props: any) {
       )}
       {isSearchOpen && (
         <SearchDropdown
+          setIsOpen={setIsSearchOpen}
           recommendedProducts={props.products}
           isOpen={isSearchOpen}
-          close={() => setIsSearchOpen(false)}
           countryCode={props.countryCode}
         />
       )}
@@ -44,6 +44,7 @@ export default function NavContent(props: any) {
         className={cn('relative block', {
           'medium:absolute medium:left-1/2 medium:top-1/2 medium:-translate-x-1/2 medium:-translate-y-1/2':
             !isSearchOpen,
+          'right-0 z-40': isSearchOpen,
         })}
       >
         <LocalizedClientLink href="/">

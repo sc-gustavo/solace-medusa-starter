@@ -14,7 +14,7 @@ export const RecommendedItem = ({ item }: { item: StoreProduct }) => {
         <div className="flex h-[90px] w-[90px]">
           <Thumbnail thumbnail={item.thumbnail} size="square" />
         </div>
-        <Box className="px-4 medium:flex-grow">
+        <Box className="px-4 pt-3 medium:flex-grow">
           <Text className="font-medium" data-testid="product-name">
             {item.title}
           </Text>

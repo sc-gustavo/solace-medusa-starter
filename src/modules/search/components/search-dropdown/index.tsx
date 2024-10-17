@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 
 import { cn } from '@lib/util/cn'
 import { StoreProduct } from '@medusajs/types'
@@ -13,17 +13,40 @@ import { RecommendedItem } from './recommended-item'
 export default function SearchDropdown({
   isOpen,
   countryCode,
-  close,
+  setIsOpen,
   recommendedProducts,
 }: {
+  setIsOpen: (value: boolean) => void
   isOpen: boolean
   countryCode: string
-  close: () => void
   recommendedProducts: StoreProduct[]
 }) {
+  const [delayClose, setDelayClose] = useState(null)
+  const handleMouseEnter = () => {
+    if (delayClose) {
+      clearTimeout(delayClose)
+    }
+    setIsOpen(true)
+  }
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setIsOpen(false)
+    }, 1000)
+    setDelayClose(timeout)
+  }
+
+  useEffect(() => {
+    return () => {
+      if (delayClose) {
+        clearTimeout(delayClose)
+      }
+    }
+  }, [delayClose])
   return (
     <div
-      onMouseLeave={close}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       className="hidden w-full large:absolute large:left-1/2 large:top-4 large:z-30 large:block large:-translate-x-1/2"
     >
       <ControlledSearchBox
