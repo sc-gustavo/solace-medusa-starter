@@ -68,14 +68,14 @@ export default function SearchModal({ countryCode }: { countryCode: string }) {
             className="sm:w-fit absolute mt-5 flex h-fit w-full flex-col gap-6 small:max-w-[700px] small:gap-8"
             data-testid="search-modal-container"
           >
-            <ControlledSearchBox
+            {/* <ControlledSearchBox
               inputRef={inputRef}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onSubmit={handleSubmit}
               onReset={() => setQuery('')}
               placeholder="Search products..."
-            />
+            /> */}
             {query && (
               <LocalizedClientLink
                 href={`/results/${query}`}
