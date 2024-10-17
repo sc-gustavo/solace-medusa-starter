@@ -40,6 +40,7 @@ export const SearchDialog = ({
     const handleResize = () => {
       setIsLargeScreen(window.innerWidth > 900)
     }
+    handleResize()
     window.addEventListener('resize', handleResize)
     return () => {
       window.removeEventListener('resize', handleResize)
