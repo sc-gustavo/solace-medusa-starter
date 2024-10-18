@@ -1,7 +1,6 @@
 <h1 align="center">
-  <a href="https://solace-medusa-starter.vercel.app/de"><img width="300" alt="Solace Logo" src="https://github.com/user-attachments/assets/468606f5-d386-444d-aff4-3d4d50972d34"></a>
+  <a href="https://solace-medusa-starter.vercel.app/de"><img width="300" alt="Solace Logo" src="https://github.com/user-attachments/assets/d53d1a00-f94a-4ff5-ad05-892ed86d8d9d"></a>
   <br>
-
 
   <br>
   DTC furniture eCommerce starter
