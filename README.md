@@ -10,6 +10,8 @@
 
 <p align="center">Solace is a sleek and modern DTC furniture eCommerce starter built on <a href="https://medusajs.com/" target="_blank">Medusa 2.0</a> and <a href="https://nextjs.org/docs" target="_blank">Next.js 14</a>. It offers a complete suite for launching an online store, including a product grid with filtering, user profiles, order history, multi-step checkout with Stripe integration, product search, and customizable product pages. Integrated with <a href="https://github.com/strapi/strapi" target="_blank">Strapi CMS</a>, it offers pre-built content models for easy website editing.</p>
 
+&nbsp;
+
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -180,6 +182,11 @@ yarn start
 - [Website](https://strapi.io/)
 - [GitHub](https://github.com/strapi/strapi)
 - [Documentation](https://docs.strapi.io/)
+
+&nbsp;
+
+> [!IMPORTANT]
+> **Image Usage Disclaimer**: The images used in this starter are for preview purposes only. They are licensed exclusively for use within this demo and cannot be used in any commercial applications or redistributed. If you intend to use this starter for your own store, please replace all images with assets that are appropriately licensed for your project.
 
 &nbsp;
 
