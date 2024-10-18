@@ -1,7 +1,6 @@
 <h1 align="center">
   <a href="https://solace-medusa-starter.vercel.app/de"><img width="300" alt="Solace Logo" src="https://github.com/user-attachments/assets/d53d1a00-f94a-4ff5-ad05-892ed86d8d9d"></a>
   <br>
-
   <br>
   DTC furniture eCommerce starter
   <br>
@@ -10,6 +9,12 @@
 <p align="center">Solace is a sleek and modern DTC furniture eCommerce starter built on <a href="https://medusajs.com/" target="_blank">Medusa 2.0</a> and <a href="https://nextjs.org/docs" target="_blank">Next.js 14</a>. It offers a complete suite for launching an online store, including a product grid with filtering, user profiles, order history, multi-step checkout with Stripe integration, product search, and customizable product pages. Integrated with <a href="https://github.com/strapi/strapi" target="_blank">Strapi CMS</a>, it offers pre-built content models for easy website editing.</p>
 
 &nbsp;
+
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/4ca7743c-c922-4b4b-bc1a-2f5bec0df35b" controls="controls" muted="muted" playsinline="playsinline">
+</video>
+</p>
+
 
 ## Table of Contents
 
