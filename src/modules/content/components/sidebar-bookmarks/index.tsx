@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { cn } from '@lib/util/cn'
 import { scrollToSection } from '@lib/util/scroll-to-section'
@@ -18,7 +18,28 @@ type SidebarBookmarksProps = {
 
 const SidebarBookmarks = ({ data }: SidebarBookmarksProps) => {
   const [isOpen, setIsOpen] = useState(true)
-  const [activeSection, setActiveSection] = useState('placing-order')
+  const [activeSection, setActiveSection] = useState(data[0].id)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 96
+
+      for (let i = data.length - 1; i >= 0; i--) {
+        const section = document.getElementById(data[i].id)
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(data[i].id)
+          break
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [data])
 
   return (
     <div className="sticky top-24 w-full bg-primary">
@@ -48,10 +69,13 @@ const SidebarBookmarks = ({ data }: SidebarBookmarksProps) => {
                     scrollToSection(section.id)
                     setActiveSection(section.id)
                   }}
-                  className={cn('w-fit cursor-pointer py-2 text-left text-lg', {
-                    'border-b border-action-primary':
-                      activeSection === section.id,
-                  })}
+                  className={cn(
+                    'w-fit cursor-pointer py-2 text-left text-lg transition-colors duration-500',
+                    {
+                      'border-b border-action-primary':
+                        activeSection === section.id,
+                    }
+                  )}
                 >
                   {section.label}
                 </button>
