@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useParams } from 'next/navigation'
 
 import { addToCartCheapestVariant } from '@lib/data/cart'
+import { useCartStore } from '@lib/store/useCartStore'
 import { cn } from '@lib/util/cn'
 import { Button } from '@modules/common/components/button'
 import { toast } from '@modules/common/components/toast'
@@ -17,6 +18,7 @@ export function ProductActions({
   regionId: string
 }) {
   const [isAddingToCart, setIsAddingToCart] = useState(false)
+  const { openCartDropdown } = useCartStore()
   const countryCode = useParams().countryCode as string
 
   const handleAddToCart = async () => {
@@ -30,7 +32,11 @@ export function ProductActions({
       })
 
       if (result.success) {
-        toast('success', result.message)
+        setTimeout(() => {
+          openCartDropdown()
+
+          toast('success', result.message)
+        }, 1000)
       } else {
         toast('error', result.error)
       }
