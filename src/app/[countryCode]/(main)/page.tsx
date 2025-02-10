@@ -73,6 +73,7 @@ export default async function Home(props: {
       )}
       <Suspense fallback={<SkeletonProductsCarousel />}>
         <ProductCarousel
+          testId="our-bestsellers-section"
           products={products}
           regionId={region.id}
           title="Our bestsellers"

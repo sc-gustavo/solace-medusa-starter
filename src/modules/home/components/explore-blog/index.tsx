@@ -17,7 +17,7 @@ export function ExploreBlog({ posts }: { posts: BlogPost[] }) {
   })
 
   return (
-    <Container className="overflow-hidden">
+    <Container className="overflow-hidden" data-testid="get-inspired-section">
       <Box className="flex flex-col gap-6 small:gap-12">
         <Box className="flex items-center justify-between">
           <Heading

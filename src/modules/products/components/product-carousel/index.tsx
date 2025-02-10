@@ -18,6 +18,7 @@ interface ProductCarouselProps {
   regionId: string
   title: string
   viewAll?: ViewAllProps
+  testId?: string
 }
 
 export function ProductCarousel({
@@ -25,9 +26,10 @@ export function ProductCarousel({
   regionId,
   title,
   viewAll,
+  testId,
 }: ProductCarouselProps) {
   return (
-    <Container className="overflow-hidden">
+    <Container className="overflow-hidden" data-testid={testId}>
       <Box className="flex flex-col gap-6 small:gap-12">
         <CarouselWrapper title={title} productsCount={products.length}>
           <Box className="flex gap-2">
