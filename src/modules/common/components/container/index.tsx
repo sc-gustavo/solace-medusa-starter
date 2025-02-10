@@ -29,12 +29,16 @@ export function Container<T extends React.ElementType = 'div'>({
   maxWidth,
   className,
   children,
+  ...props
 }: Omit<React.ComponentPropsWithoutRef<T>, keyof ContainerProps<T>> &
   ContainerProps<T>) {
   const Component = as ?? ('div' as React.ElementType)
 
   return (
-    <Component className={cn(containerVariants({ maxWidth }), className)}>
+    <Component
+      className={cn(containerVariants({ maxWidth }), className)}
+      {...props}
+    >
       {children}
     </Component>
   )
