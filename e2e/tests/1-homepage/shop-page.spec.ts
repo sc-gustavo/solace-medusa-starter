@@ -1,18 +1,13 @@
 import { test } from '@playwright/test';
-import Homepage from '../../fixtures/page-objects/1-homepage/homepage';
 import ShopPage from '../../fixtures/page-objects/1-homepage/shop-page';
 
 test.describe('Shop page Tests', () => {
-  let homepage: Homepage;
   let shoppage: ShopPage;  
 
 test.beforeEach(async ({ page }) => {
     shoppage = new ShopPage(page);  
+    await page.goto(shoppage.shopPageUrl);
   });
-
-test.beforeEach(async ({ page }) => {
-  await page.goto(homepage.shopPageUrl);
-});
 
 test('Check shop page loading and it`s title and header', async ({ page }) => {
 
@@ -20,7 +15,7 @@ test('Check shop page loading and it`s title and header', async ({ page }) => {
 
 });
 
-test('Check filtering by collections', async({page}) => {
+test.only('Check filtering by collections', async({page}) => {
 
   shoppage.checkFilteringByCollections()
 

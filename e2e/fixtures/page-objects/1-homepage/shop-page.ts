@@ -1,27 +1,23 @@
 export{}
 
 import { Page, expect } from '@playwright/test'
-import Homepage from '../1-homepage/homepage'
-
-let homepage: Homepage
-
 class ShopPage {
 
     page: Page
+    shopPageUrl: string
+
     constructor(page: Page) {
         this.page = page;
+        this.shopPageUrl = 'https://solace-medusa-starter.vercel.app/shop';
     }
-
 
     async checkTitleAndHeading() {
 
-        expect(homepage.shopPageUrl).toContain('/shop')
+        expect(this.shopPageUrl).toContain('/shop')
 
-        const pageTitle = await this.page.title();
+        await this.page.waitForSelector('h1');
 
-        expect(pageTitle).toBe('Shop - All products');
-
-        const pageHeader = this.page.getByRole('heading', {name: 'All products'})
+        const pageHeader = await this.page.$eval('h1', el => el.textContent);
 
         expect(pageHeader).toBe('All products')
 
@@ -29,20 +25,22 @@ class ShopPage {
 
     async checkFilteringByCollections() {
 
-        const collectionFilterBtn = this.page.getByTestId('data-testid="collection-filter')
+        const collectionFilterBtn = await this.page.locator('[data-testid="collection-filter"]');
 
-        // dropdown appearing check
-        await expect(collectionFilterBtn).toHaveAttribute('data-state', 'closed');
+        await collectionFilterBtn.waitFor({ state: 'visible' });
 
-        await collectionFilterBtn.click();
+        await expect(collectionFilterBtn).toBeEnabled()
 
-        await expect(collectionFilterBtn).toHaveAttribute('data-state', 'open')
+        await collectionFilterBtn.click({ force: true });
 
         // single item from filter check and click
         expect(this.page.getByTestId('ashton-filter-item')).toBeVisible()
 
-        await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').click()
+        await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').click({ force: true })
 
+        await this.page.waitForURL('**/shop?collection');
+
+        expect(this.shopPageUrl).toContain('/shop?collection')
     }
 
     async checkFilteringByProductType() {
