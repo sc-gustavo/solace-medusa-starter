@@ -15,7 +15,7 @@ test('Check shop page loading and it`s title and header', async ({ page }) => {
 
 });
 
-test.only('Check filtering by collections', async({page}) => {
+test('Check filtering by collections', async({page}) => {
 
   shoppage.checkFilteringByCollections()
 
