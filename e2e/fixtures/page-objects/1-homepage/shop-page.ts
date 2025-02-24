@@ -1,6 +1,7 @@
 export{}
 
 import { Page, expect } from '@playwright/test'
+import { visible } from 'ansi-colors';
 class ShopPage {
 
     page: Page
@@ -27,17 +28,23 @@ class ShopPage {
 
         expect(this.shopPageUrl).toContain('/shop')
 
+        await this.page.waitForLoadState('load');
 
-        // Need improvement !! ! ! ! 
-        const collectionFilterBtn = this.page.getByTestId('collection-filter');
+        await this.page.waitForLoadState('domcontentloaded');
 
-        await collectionFilterBtn.click({ force: true });
-        // --------
+        // Doesnt work - all the time we have 'test ended' error
+        const collectionFilterBtn = this.page.locator('collections-filter');
+
+        const isClosed = await collectionFilterBtn.evaluate(button => button.getAttribute('data-state') === 'closed');
+        if (isClosed) {
+            await collectionFilterBtn.click();
+            }
+        /// - - - - - - - - - - - - - - - - - 
 
         // single item from filter check and click
-        expect(this.page.getByTestId('ashton-filter-item')).toBeVisible()
-
-        await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').click({ force: true })
+        await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').waitFor()
+        
+        await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').click({ force: true });
 
         expect(this.shopPageUrl).toContain(this.shopPageUrl)
     }
