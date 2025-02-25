@@ -6,7 +6,12 @@ test.describe('Shop page Tests', () => {
 
 test.beforeEach(async ({ page }) => {
     shoppage = new ShopPage(page);  
+    
     await page.goto(shoppage.shopPageUrl);
+
+    await page.waitForLoadState('load');
+
+    await page.waitForLoadState('domcontentloaded');
   });
 
 test('Check shop page loading and it`s title and header', async ({ page }) => {

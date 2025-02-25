@@ -32,13 +32,12 @@ class ShopPage {
 
         await this.page.waitForLoadState('domcontentloaded');
 
-        // Doesnt work - all the time we have 'test ended' error
-        const collectionFilterBtn = this.page.locator('collections-filter');
+        //Doesnt work - all the time we have 'test ended' error
+        const collectionFilterBtn = this.page.getByRole('button', {name: 'Collections'});
 
-        const isClosed = await collectionFilterBtn.evaluate(button => button.getAttribute('data-state') === 'closed');
-        if (isClosed) {
-            await collectionFilterBtn.click();
-            }
+        await collectionFilterBtn.click({force: true});
+
+        await this.page.waitForTimeout(4000)
         /// - - - - - - - - - - - - - - - - - 
 
         // single item from filter check and click
