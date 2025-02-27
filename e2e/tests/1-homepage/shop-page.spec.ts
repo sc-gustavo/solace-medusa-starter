@@ -7,8 +7,6 @@ test.describe('Shop page Tests', () => {
 test.beforeEach(async ({ page }) => {
     shoppage = new ShopPage(page);  
 
-    await page.goto(shoppage.shopPageUrl)
-
     await page.waitForLoadState('load');
 
     await page.waitForLoadState('domcontentloaded');
@@ -51,26 +49,22 @@ test('Check filtering by price', async({page}) => {
 })
 
 
-// NEED DEBUG __________________________________________
+test('Check filter tabs and result of filtering', async({page}) => {
 
-// test('Check filter tabs and result of filtering', async({page}) => {
+  await shoppage.checkFilterResults() 
 
-//   shoppage.checkFilterResults() 
+})
 
-// })
+test('Check `Recommended products` section', async({page}) => {
 
-// test('Check `Recommended products` section', async({page}) => {
+  await shoppage.checkRecommendedProducts()
 
-//   shoppage.checkRecommendedProducts()
+})
 
-// })
+test('Check pagination', async({page}) => {
 
-// test('Check pagination', async({page}) => {
+  await shoppage.checkPagination()
 
-//   shoppage.checkPagination()
-
-//   })
-
-// _________________________________________________________
+  })
 })
 

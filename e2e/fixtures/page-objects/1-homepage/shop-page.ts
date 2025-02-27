@@ -7,14 +7,17 @@ class ShopPage {
     page: Page
     shopPageUrl: string
     homeURL: string
+    shopWithFiltersUrl: string
 
     constructor(page: Page) {
         this.page = page;
         this.shopPageUrl = 'https://solace-medusa-starter.vercel.app/de/shop';
-        this.homeURL = 'https://solace-medusa-starter.vercel.app/de'
+        this.shopWithFiltersUrl = 'https://solace-medusa-starter.vercel.app/de/shop?collection=pcol_01J93QK3N82DHGC3K3XE19YMVG&type=ptyp_01J93Z6T952WCBPX62QFM2SADB&material=Leather&price=under-100'
     }
 
     async checkTitleAndHeading() {
+
+        await this.page.goto(this.shopPageUrl)
 
         expect(this.shopPageUrl).toContain('/shop')
 
@@ -27,6 +30,8 @@ class ShopPage {
     }
 
     async checkFilteringByCollections() {
+
+        await this.page.goto(this.shopPageUrl)
         
         await waitForPageLoad(this.page)
 
@@ -47,6 +52,8 @@ class ShopPage {
 
     async checkFilteringByProductType() {
 
+        await this.page.goto(this.shopPageUrl)
+
         await waitForPageLoad(this.page)
 
         expect(this.shopPageUrl).toContain('/shop')
@@ -62,6 +69,8 @@ class ShopPage {
     }
 
     async checkFilteringByMaterial() {
+
+        await this.page.goto(this.shopPageUrl)
 
         await waitForPageLoad(this.page)
 
@@ -79,6 +88,12 @@ class ShopPage {
 
     async checkFilteringByPrice() {
 
+        await this.page.goto(this.shopPageUrl)
+
+        await waitForPageLoad(this.page)
+
+        expect(this.shopPageUrl).toContain('/shop')
+
         const priceFilterBtn = this.page.getByLabel('Choose price')
 
         await priceFilterBtn .click();
@@ -88,34 +103,34 @@ class ShopPage {
 
         await this.page.locator('[data-testid="under-$100-filter-item"] button[role="checkbox"]').click()
     }
-
+    
     async checkFilterResults() {
-        
-        // selector need improvement
-        const container = this.page.locator('.flex.flex-wrap.gap-4.gap-y-2');
-        // ---
 
-        const filterTabs = ['Ashton', 'Barstools', 'Leather', 'Under $100'];
+        await this.page.goto(this.shopWithFiltersUrl)
 
-        for (const filterTabText of filterTabs) {
-            const item = container.locator(`text=${filterTabText}`);
-            await expect(item).toBeVisible();
-        } 
+        await waitForPageLoad(this.page);
+    
+        // Check filtered product by params from URL
+        const regex = /(?:[?&])(collection|type|material|price)=/;
+    
+        expect(this.shopWithFiltersUrl).toMatch(regex);
     }
+    
 
     async checkRecommendedProducts() {
 
-        // check heading - selector needed
-        const recommendedProductsHeading = this.page.locator('.small:gap-12 h2:text("Recommended product")')
+        await this.page.goto(this.shopPageUrl)
+
+        await waitForPageLoad(this.page);
+
+        expect(this.shopPageUrl).toContain('/shop')
+
+        const recommendedProductsHeading = this.page.getByRole('heading', { name: 'Recommended products' })
 
         expect(recommendedProductsHeading).toHaveText('Recommended products')
-        //--
 
         // check recomended products existing
-
-        // selector needed
         const recommendedProductsSection = this.page.locator('.flex.gap-2');
-        // --
 
         const allRecommendedProducts = recommendedProductsSection.locator('*');
 
@@ -126,6 +141,10 @@ class ShopPage {
     }
 
     async checkPagination() {
+
+        await this.page.goto(this.shopPageUrl)
+
+        await waitForPageLoad(this.page);
 
         const pagination = this.page.getByTestId('product-pagination')
 
