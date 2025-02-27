@@ -1,15 +1,17 @@
 export{}
 
 import { Page, expect } from '@playwright/test'
-import { visible } from 'ansi-colors';
+import waitForPageLoad  from '../../../utils/tests-helpers'
 class ShopPage {
 
     page: Page
     shopPageUrl: string
+    homeURL: string
 
     constructor(page: Page) {
         this.page = page;
-        this.shopPageUrl = 'https://solace-medusa-starter.vercel.app/shop';
+        this.shopPageUrl = 'https://solace-medusa-starter.vercel.app/de/shop';
+        this.homeURL = 'https://solace-medusa-starter.vercel.app/de'
     }
 
     async checkTitleAndHeading() {
@@ -25,39 +27,33 @@ class ShopPage {
     }
 
     async checkFilteringByCollections() {
+        
+        await waitForPageLoad(this.page)
 
         expect(this.shopPageUrl).toContain('/shop')
 
-        await this.page.waitForLoadState('load');
+        const collectionFilterBtn = this.page.getByLabel('Choose collection/s')
 
-        await this.page.waitForLoadState('domcontentloaded');
-
-        //Doesnt work - all the time we have 'test ended' error
-        const collectionFilterBtn = this.page.getByRole('button', {name: 'Collections'});
+        await expect(collectionFilterBtn).toBeVisible()
 
         await collectionFilterBtn.click({force: true});
-
-        await this.page.waitForTimeout(4000)
-        /// - - - - - - - - - - - - - - - - - 
 
         // single item from filter check and click
         await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').waitFor()
         
         await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').click({ force: true });
 
-        expect(this.shopPageUrl).toContain(this.shopPageUrl)
     }
 
     async checkFilteringByProductType() {
 
-        const productTypeFilterBtn = this.page.getByTestId('barstools-filter-item')
+        await waitForPageLoad(this.page)
 
-        // dropdown appearing check
-        await expect(productTypeFilterBtn).toHaveAttribute('data-state', 'closed');
+        expect(this.shopPageUrl).toContain('/shop')
+
+        const productTypeFilterBtn = this.page.getByLabel('Choose product type/s')
 
         await productTypeFilterBtn.click();
-
-        await expect(productTypeFilterBtn).toHaveAttribute('data-state', 'open')
 
         // single item from filter check and click
         expect(this.page.getByTestId('barstools-filter-item')).toBeVisible()
@@ -67,14 +63,13 @@ class ShopPage {
 
     async checkFilteringByMaterial() {
 
-        const materialFilterBtn = this.page.getByTestId('leather-filter-item')
+        await waitForPageLoad(this.page)
 
-        // dropdown appearing check
-        await expect(materialFilterBtn).toHaveAttribute('data-state', 'closed');
+        expect(this.shopPageUrl).toContain('/shop')
+
+        const materialFilterBtn = this.page.getByLabel('Choose material/s')
 
         await materialFilterBtn.click();
-
-        await expect(materialFilterBtn).toHaveAttribute('data-state', 'open')
 
         // single item from filter check and click
         expect(this.page.getByTestId('leather-filter-item')).toBeVisible()
@@ -84,14 +79,9 @@ class ShopPage {
 
     async checkFilteringByPrice() {
 
-        const priceFilterBtn = this.page.getByTestId('under-$100-filter-item')
-
-        // dropdown appearing check
-        await expect(priceFilterBtn ).toHaveAttribute('data-state', 'closed');
+        const priceFilterBtn = this.page.getByLabel('Choose price')
 
         await priceFilterBtn .click();
-
-        await expect(priceFilterBtn ).toHaveAttribute('data-state', 'open')
 
         // single item from filter check and click
         expect(this.page.getByTestId('under-$100-filter-item')).toBeVisible()

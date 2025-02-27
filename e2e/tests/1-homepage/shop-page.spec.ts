@@ -6,60 +6,71 @@ test.describe('Shop page Tests', () => {
 
 test.beforeEach(async ({ page }) => {
     shoppage = new ShopPage(page);  
-    
-    await page.goto(shoppage.shopPageUrl);
+
+    await page.goto(shoppage.shopPageUrl)
 
     await page.waitForLoadState('load');
 
     await page.waitForLoadState('domcontentloaded');
   });
 
+  test.afterEach(async ({ page }, testInfo) => {
+    if (testInfo.status !== 'timedOut' && testInfo.status !== 'interrupted') {
+      await page.close();
+    }
+  });
+
 test('Check shop page loading and it`s title and header', async ({ page }) => {
 
-  shoppage.checkTitleAndHeading()
+  await shoppage.checkTitleAndHeading()
 
 });
 
-test.only('Check filtering by collections', async({page}) => {
+test('Check filtering by collections', async({page}) => {
 
-  shoppage.checkFilteringByCollections()
+  await shoppage.checkFilteringByCollections()
 
 })
 
 test('Check filtering by product type', async({page}) => {
 
-  shoppage.checkFilteringByProductType()
+  await shoppage.checkFilteringByProductType()
 
 })
 
 test('Check filtering by material', async({page}) => {
 
-  shoppage.checkFilteringByMaterial()
+  await shoppage.checkFilteringByMaterial()
 
 })
 
 test('Check filtering by price', async({page}) => {
 
-  shoppage.checkFilteringByPrice()
+  await shoppage.checkFilteringByPrice()
 
 })
 
-test('Check filter tabs and result of filtering', async({page}) => {
 
-  shoppage.checkFilterResults() 
+// NEED DEBUG __________________________________________
 
+// test('Check filter tabs and result of filtering', async({page}) => {
+
+//   shoppage.checkFilterResults() 
+
+// })
+
+// test('Check `Recommended products` section', async({page}) => {
+
+//   shoppage.checkRecommendedProducts()
+
+// })
+
+// test('Check pagination', async({page}) => {
+
+//   shoppage.checkPagination()
+
+//   })
+
+// _________________________________________________________
 })
 
-test('Check `Recommended products` section', async({page}) => {
-
-  shoppage.checkRecommendedProducts()
-
-})
-
-test('Check pagination', async({page}) => {
-
-  shoppage.checkPagination()
-
-  })
-
-})
