@@ -1,8 +1,13 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+import AboutUsPage from '../../fixtures/page-objects/1-homepage/about-us'
 
 test.describe('Shop page Tests', () => { 
+  let aboutuspage: AboutUsPage
 
 test.beforeEach(async ({ page }) => {
+
+    aboutuspage = new AboutUsPage(page);
+
     await page.goto('https://solace-medusa-starter.vercel.app/de/about-us')
 
     await page.waitForLoadState('load');
@@ -19,33 +24,38 @@ test.beforeEach(async ({ page }) => {
 
 test('Check about us page loading and it`s header', async ({ page }) => {
 
-    const pageTitle = await page.title();
-
-    expect(pageTitle).toBe('About Us');
+   await aboutuspage.checkLoadingAndHeader()
 
 });
 
 test('Check header and logo', async ({ page }) => {
 
-    const headerLogo = page.locator('div').filter({ hasText: 'Solace Logo Big' })
-
-    expect(headerLogo).toBeTruthy()
+   await aboutuspage.checkPageHeaderAndLogo()
 
 });
 
 test('Check `Our story` section`', async ({ page }) => {
 
-    const ourStorySection = page.locator('div').filter({ hasText: 'Our storyAt Solace, we' }).first()
-
-    expect(ourStorySection).toBeTruthy()
-
-    //Need fix------
-
-    // const ourStoryHeading = page.getByRole('heading', { name: 'Our story' })
-
-    // expect(ourStoryHeading).toHaveText('Our story')
-    // ------------
+   await aboutuspage.checkOurStorySection()
 
 });
 
+
+test('Check `Why us?` section`', async ({ page }) => {
+
+  await aboutuspage.checkWhyUsSection()
+
+});
+
+test('Check `Our craftsmanship` section`', async ({ page }) => {
+
+  await aboutuspage.checkOurCraftsmanshipSection()
+
+});
+
+test('Check `Get inspired` section`', async ({ page }) => {
+
+  await aboutuspage.checkGetInspiredSection()
+
+});
 })
