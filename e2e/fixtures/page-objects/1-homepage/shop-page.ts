@@ -1,7 +1,7 @@
 export{}
 
 import { Page, expect } from '@playwright/test'
-import waitForPageLoad  from '../../../utils/tests-helpers'
+import helpers  from '../../../utils/tests-helpers'
 class ShopPage {
 
     page: Page
@@ -33,7 +33,7 @@ class ShopPage {
 
         await this.page.goto(this.shopPageUrl)
         
-        await waitForPageLoad(this.page)
+        await helpers.waitForPageLoad(this.page)
 
         expect(this.shopPageUrl).toContain('/shop')
 
@@ -54,7 +54,7 @@ class ShopPage {
 
         await this.page.goto(this.shopPageUrl)
 
-        await waitForPageLoad(this.page)
+        await helpers.waitForPageLoad(this.page)
 
         expect(this.shopPageUrl).toContain('/shop')
 
@@ -72,7 +72,7 @@ class ShopPage {
 
         await this.page.goto(this.shopPageUrl)
 
-        await waitForPageLoad(this.page)
+        await helpers.waitForPageLoad(this.page)
 
         expect(this.shopPageUrl).toContain('/shop')
 
@@ -90,7 +90,7 @@ class ShopPage {
 
         await this.page.goto(this.shopPageUrl)
 
-        await waitForPageLoad(this.page)
+        await helpers.waitForPageLoad(this.page)
 
         expect(this.shopPageUrl).toContain('/shop')
 
@@ -108,7 +108,7 @@ class ShopPage {
 
         await this.page.goto(this.shopWithFiltersUrl)
 
-        await waitForPageLoad(this.page);
+        await helpers.waitForPageLoad(this.page)
     
         // Check filtered product by params from URL
         const regex = /(?:[?&])(collection|type|material|price)=/;
@@ -121,7 +121,7 @@ class ShopPage {
 
         await this.page.goto(this.shopPageUrl)
 
-        await waitForPageLoad(this.page);
+        await helpers.waitForPageLoad(this.page)
 
         expect(this.shopPageUrl).toContain('/shop')
 
@@ -144,7 +144,7 @@ class ShopPage {
 
         await this.page.goto(this.shopPageUrl)
 
-        await waitForPageLoad(this.page);
+        await helpers.waitForPageLoad(this.page)
 
         const pagination = this.page.getByTestId('product-pagination')
 
