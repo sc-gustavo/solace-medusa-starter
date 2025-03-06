@@ -1,3 +1,4 @@
+import { expect } from "@playwright/test";
 
 
 export async function waitForPageLoad(page) {
@@ -47,13 +48,47 @@ export async function goToSignInPage(page) {
     await page.getByRole('link', { name: 'Sign in' }).click();
 }
 
+export async function login(page) {
+
+    goToSignInPage(page)
+
+    fillSignInInputs(page)
+
+    await page.getByTestId('sign-in-button').click({force: true});
+}
+
+export async function goToSingleProductPage(page) {
+
+    await page.goto('https://solace-medusa-starter.vercel.app/de/products/winsdor-bar-stool')
+
+    await page.waitForURL('https://solace-medusa-starter.vercel.app/de/products/winsdor-bar-stool')
+
+    await expect(page).toHaveURL(/products\/winsdor-bar-stool/)
+
+    waitForPageLoad(page)
+}
+
+export async function goToCartPage(page) {
+
+    await page.goto('https://solace-medusa-starter.vercel.app/de/cart')
+
+    await page.waitForURL('https://solace-medusa-starter.vercel.app/de/cart')
+
+    await expect(page).toHaveURL(/\/cart/)
+
+    waitForPageLoad(page)
+}
+
 
 const helpers = {
     waitForPageLoad,
     fillSignupInputs,
     fillSignInInputs,
     goToSignUpPage,
-    goToSignInPage
+    goToSignInPage,
+    login,
+    goToSingleProductPage,
+    goToCartPage
 };
 export default helpers;
 
