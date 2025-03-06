@@ -79,6 +79,27 @@ export async function goToCartPage(page) {
     waitForPageLoad(page)
 }
 
+export async function fillShippingAddressInputs(page){
+
+  await page.getByTestId('shipping-first-name-input').fill('Adam');
+
+  await page.getByTestId('shipping-last-name-input').fill('Nowak');
+
+  await page.getByTestId('shipping-company-input').fill('Firma');
+
+  await page.getByTestId('shipping-address-input').fill('Mokra 12');
+
+  await page.getByTestId('shipping-postal-code-input').fill('00-999');
+
+  await page.getByTestId('shipping-city-input').fill('Warsaw');
+
+  await page.getByTestId('shipping-province-input').fill('Mazowieckie');
+
+  await page.getByTestId('billing-email-input').fill('adam@example.com');
+
+  await page.getByTestId('shipping-phone-input').fill('444222000');
+}
+
 
 const helpers = {
     waitForPageLoad,
@@ -88,7 +109,8 @@ const helpers = {
     goToSignInPage,
     login,
     goToSingleProductPage,
-    goToCartPage
+    goToCartPage,
+    fillShippingAddressInputs
 };
 export default helpers;
 
