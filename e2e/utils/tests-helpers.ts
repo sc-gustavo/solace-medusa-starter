@@ -50,9 +50,9 @@ export async function goToSignInPage(page) {
 
 export async function login(page) {
 
-    goToSignInPage(page)
+    await goToSignInPage(page)
 
-    fillSignInInputs(page)
+    await fillSignInInputs(page)
 
     await page.getByTestId('sign-in-button').click({force: true});
 }
@@ -65,7 +65,7 @@ export async function goToSingleProductPage(page) {
 
     await expect(page).toHaveURL(/products\/winsdor-bar-stool/)
 
-    waitForPageLoad(page)
+    await waitForPageLoad(page)
 }
 
 export async function goToCartPage(page) {
@@ -76,10 +76,14 @@ export async function goToCartPage(page) {
 
     await expect(page).toHaveURL(/\/cart/)
 
-    waitForPageLoad(page)
+    await waitForPageLoad(page)
 }
 
-export async function fillShippingAddressInputs(page){
+export async function fillShippingAddressInputs(page) {
+    
+  await this.page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=address')
+
+  await waitForPageLoad(page)
 
   await page.getByTestId('shipping-first-name-input').fill('Adam');
 
@@ -100,6 +104,20 @@ export async function fillShippingAddressInputs(page){
   await page.getByTestId('shipping-phone-input').fill('444222000');
 }
 
+export async function waitForURL(page, URL: RegExp) {
+
+    const baseURL = 'https://solace-medusa-starter.vercel.app/de/';
+
+    const fullURLPattern = new RegExp(`^${baseURL}${URL.source}`);
+
+    await page.waitForURL(fullURLPattern);
+
+    await expect(page).toHaveURL(fullURLPattern);
+
+    await helpers.waitForPageLoad(page);
+}
+
+
 
 const helpers = {
     waitForPageLoad,
@@ -110,7 +128,8 @@ const helpers = {
     login,
     goToSingleProductPage,
     goToCartPage,
-    fillShippingAddressInputs
+    fillShippingAddressInputs,
+    waitForURL
 };
 export default helpers;
 

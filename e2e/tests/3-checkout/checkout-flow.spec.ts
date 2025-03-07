@@ -1,32 +1,19 @@
 export{}
 
-import { test, expect, BrowserContext } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import AddToCart from '../../fixtures/page-objects/3-checkout/adding-to-cart';
+import Checkout from '../../fixtures/page-objects/3-checkout/checkout-flow'
 import helpers from '../../utils/tests-helpers';
 
 test.describe('Checkout flow', () => {
-  test.describe.configure({ mode: 'serial' });
 
-  let addToCart: AddToCart;
-  
-  let context: BrowserContext;
+  let checkout: Checkout
 
   test.beforeEach(async ({ page, browser }) => {
 
-    addToCart = new AddToCart(page)
+    checkout = new Checkout(page)
 
     await helpers.waitForPageLoad(page)
-
-    context = await browser.newContext({ storageState: 'auth.json' });
-
-  });
-
-  test.beforeAll(async ({ browser }) => {
-    context = await browser.newContext();
-
-    const page = await context.newPage();
-    
-    await page.close();
   });
 
   test.afterEach(async ({ page }, testInfo) => {
@@ -35,62 +22,22 @@ test.describe('Checkout flow', () => {
     }
   });
 
-  test('Add product to cart and go to checkout', async ({ page }) => {
-
-    await addToCart.addProductToCart()
-
-    await addToCart.checkCartItems()
-
-    await page.getByRole('button', { name: 'Proceed to checkout' }).click()
-
-    await helpers.waitForPageLoad(page)
-
-    await page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=address')
-    
-    await expect(page).toHaveURL(/checkout\?step=address$/);
-    
-  })
-
-  test('Check shipping address step', async ({ page }) => {
-
-    // check if we are in checkout
-    await page.goto('https://solace-medusa-starter.vercel.app/de/checkout?step=address')
-
-    await helpers.waitForPageLoad(page)
-
-    await page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=address')
-    
-    await expect(page).toHaveURL(/checkout\?step=address$/);
+  test('Check flow of whole purchasing process', async ({ page }) => {
+    // add product to cart
+    await checkout.addProductToCart()
 
     // fill shipping address
     await helpers.fillShippingAddressInputs(page)
 
     // save and proceed to delivery step
-    await page.getByTestId('submit-address-button').click();
-
-    await page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=delivery')
-    
-    await expect(page).toHaveURL(/checkout\?step=address$/);
+    await checkout.saveAndProceedToDeliveryStep()
 
     // edit shipping details
-    await page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=address')
-    
-    await expect(page).toHaveURL(/checkout\?step=address$/);
-
-    await page.getByTestId('shipping-first-name-input').fill('');
-
-    await page.getByTestId('shipping-first-name-input').fill('Jan');
-
-    await page.getByTestId('submit-address-button').click();
-
-    await page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=delivery')
-    
-    await expect(page).toHaveURL(/checkout\?step=address$/);
+    await checkout.editShippingDetails()
 
     // check if shipping details was edited correctly
-    const editedShippingDetailsName = await page.getByText('Jan Nowak')
+    await checkout.checkEditedShippingDetails()
 
-    expect(editedShippingDetailsName).toHaveText('Jan Nowak')
   })
 
 })
