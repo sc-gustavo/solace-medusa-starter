@@ -80,8 +80,6 @@ export async function goToCartPage(page) {
 }
 
 export async function fillShippingAddressInputs(page) {
-    
-  await this.page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=address')
 
   await waitForPageLoad(page)
 
@@ -104,18 +102,6 @@ export async function fillShippingAddressInputs(page) {
   await page.getByTestId('shipping-phone-input').fill('444222000');
 }
 
-export async function waitForURL(page, URL: RegExp) {
-
-    const baseURL = 'https://solace-medusa-starter.vercel.app/de/';
-
-    const fullURLPattern = new RegExp(`^${baseURL}${URL.source}`);
-
-    await page.waitForURL(fullURLPattern);
-
-    await expect(page).toHaveURL(fullURLPattern);
-
-    await helpers.waitForPageLoad(page);
-}
 
 
 
@@ -128,8 +114,7 @@ const helpers = {
     login,
     goToSingleProductPage,
     goToCartPage,
-    fillShippingAddressInputs,
-    waitForURL
+    fillShippingAddressInputs
 };
 export default helpers;
 

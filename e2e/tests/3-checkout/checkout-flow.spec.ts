@@ -1,7 +1,6 @@
 export{}
 
-import { test, expect } from '@playwright/test';
-import AddToCart from '../../fixtures/page-objects/3-checkout/adding-to-cart';
+import { test } from '@playwright/test';
 import Checkout from '../../fixtures/page-objects/3-checkout/checkout-flow'
 import helpers from '../../utils/tests-helpers';
 
@@ -37,6 +36,23 @@ test.describe('Checkout flow', () => {
 
     // check if shipping details was edited correctly
     await checkout.checkEditedShippingDetails()
+
+    // choose delivery method
+    await checkout.chooseDeliveryMethod()
+
+    // edit delivery method
+    await checkout.editDeliveryMethod()
+
+    // check if delivery method was edited correctly
+    await checkout.checkEditedDeliveryMethod()
+
+
+    // DEBUG NEEDED ----------
+    // choose payment method
+    await checkout.choosePaymentMethod()
+    // ----------
+
+    // await checkout.checkOrderConfirmation()
 
   })
 
