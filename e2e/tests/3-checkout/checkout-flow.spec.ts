@@ -46,13 +46,11 @@ test.describe('Checkout flow', () => {
     // check if delivery method was edited correctly
     await checkout.checkEditedDeliveryMethod()
 
-
-    // DEBUG NEEDED ----------
     // choose payment method
     await checkout.choosePaymentMethod()
-    // ----------
 
-    // await checkout.checkOrderConfirmation()
+    // check order confirmation items
+    await checkout.checkOrderConfirmationPage()
 
   })
 

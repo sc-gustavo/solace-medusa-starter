@@ -139,15 +139,9 @@ async checkEditedDeliveryMethod() {
 
 async choosePaymentMethod() {
 
-    await this.page.waitForURL('https://solace-medusa-starter.vercel.app/de/checkout?step=payment')
-    
-    await expect(this.page).toHaveURL(/checkout\?step=payment$/);
+    await helpers.waitForPageLoad(this.page)
 
-    await this.page.waitForTimeout(3000)
-
-    const manualPaymentOption = await this.page.locator('#pp_system_default')
-
-    manualPaymentOption.click({force: true})
+    await this.page.getByRole('radio').filter({ hasText: 'Manual payment' }).check();
 
     await helpers.waitForPageLoad(this.page)
 
@@ -160,6 +154,20 @@ async checkOrderConfirmationPage() {
 
     // go to `Order Confirmation` page
     await this.page.getByTestId('submit-order-button').click();
+
+    // wait for redirect
+    await this.page.waitForURL(/\/order\/confirmed/, { timeout: 5000 });
+
+    await expect(this.page.url()).toContain('order/confirmed');
+
+    await helpers.waitForPageLoad(this.page)
+
+    await this.page.waitForTimeout(3000)
+
+    // check order confirmation page items
+    const orderConfirmedPage = await this.page.locator('h1').textContent();
+
+    expect(orderConfirmedPage).toContain('Thank you! Your order was placed successfully');
 }
 }
 export default Checkout
