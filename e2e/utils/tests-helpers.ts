@@ -1,4 +1,5 @@
 import { expect } from "@playwright/test";
+import Checkout from '../fixtures/page-objects/3-checkout/checkout-flow'
 
 
 export async function waitForPageLoad(page) {
@@ -97,9 +98,42 @@ export async function fillShippingAddressInputs(page) {
 
   await page.getByTestId('shipping-province-input').fill('Mazowieckie');
 
-  await page.getByTestId('billing-email-input').fill('adam@example.com');
+  await page.getByTestId('billing-email-input').fill('nowak@example.com');
 
   await page.getByTestId('shipping-phone-input').fill('444222000');
+}
+
+export async function orderProductFlow(page) {
+
+    const checkout = new Checkout(page);
+
+    await checkout.addProductToCart();
+
+    // fill shipping address
+    await fillShippingAddressInputs(page);
+
+    // save and proceed to delivery step
+    await checkout.saveAndProceedToDeliveryStep();
+
+    // choose delivery method
+    await checkout.chooseDeliveryMethod();
+
+    // choose payment method
+    await checkout.choosePaymentMethod();
+
+    // check order confirmation items
+    await checkout.checkOrderConfirmationPage();
+}
+
+export async function goToAccount(page) {
+
+    await page.getByTestId('profile-dropdown-button').hover();
+
+    await page.getByTestId('profile-dropdown-logged-in').getByRole('link', { name: 'Dashboard icon Dashboard' }).click();
+
+    await waitForPageLoad(page)
+
+    await expect(page).toHaveURL(/\/account/)
 }
 
 
@@ -114,7 +148,9 @@ const helpers = {
     login,
     goToSingleProductPage,
     goToCartPage,
-    fillShippingAddressInputs
+    fillShippingAddressInputs,
+    orderProductFlow,
+    goToAccount
 };
 export default helpers;
 
