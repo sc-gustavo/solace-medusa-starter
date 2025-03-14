@@ -30,19 +30,22 @@ test.describe('Shipping details in account settings page', () => {
     await helpers.goToAccount(page)
 
      // go to shipping details page
-     await shippingDetails.checkShippingDetailsPage()
+    await shippingDetails.checkShippingDetailsPage()
 
      // add new address
-     await shippingDetails.addNewAddress()
+    await shippingDetails.addNewAddress()
 
      // check new address
-     await shippingDetails.checkNewAddress()
+    await shippingDetails.checkNewAddress()
 
+    // edit address
+    await shippingDetails.editNewAddress()
 
-     // TO DO
+    // check edited address
+    await shippingDetails.checkEditedAddress()
 
-     // editAddress
+    //delete address
+    await shippingDetails.deleteAddress()
 
-     //deleteAddress
   })
 })
