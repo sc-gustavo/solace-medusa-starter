@@ -163,7 +163,26 @@ export async function addNewShippingDetailsAddress(page) {
     await waitForPageLoad(page)
   }
 
+export async function fillProfileDetails(page) {
 
+    await waitForPageLoad(page)
+
+    await this.page.getByTestId('edit-details-button').nth(0).click()
+
+    await this.page.getByTestId('first-name-input').fill('');
+
+    await this.page.getByTestId('first-name-input').fill('Adam');
+  
+    await this.page.getByTestId('last-name-input').fill('');
+
+    await this.page.getByTestId('last-name-input').fill('Nowak');
+
+    await this.page.getByTestId('phone-input').fill('');
+
+    await this.page.getByTestId('phone-input').fill('99900888');
+
+    await this.page.getByTestId('save-details-button').click()
+}
 
 
 const helpers = {
@@ -178,7 +197,8 @@ const helpers = {
     fillShippingAddressInputs,
     orderProductFlow,
     goToAccount,
-    addNewShippingDetailsAddress
+    addNewShippingDetailsAddress,
+    fillProfileDetails
 };
 export default helpers;
 
