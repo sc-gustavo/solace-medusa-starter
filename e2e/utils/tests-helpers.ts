@@ -167,21 +167,21 @@ export async function fillProfileDetails(page) {
 
     await waitForPageLoad(page)
 
-    await this.page.getByTestId('edit-details-button').nth(0).click()
+    await page.getByTestId('edit-details-button').nth(0).click()
 
-    await this.page.getByTestId('first-name-input').fill('');
+    await page.getByTestId('first-name-input').fill('');
 
-    await this.page.getByTestId('first-name-input').fill('Adam');
+    await page.getByTestId('first-name-input').fill('Adam');
   
-    await this.page.getByTestId('last-name-input').fill('');
+    await page.getByTestId('last-name-input').fill('');
 
-    await this.page.getByTestId('last-name-input').fill('Nowak');
+    await page.getByTestId('last-name-input').fill('Nowak');
 
-    await this.page.getByTestId('phone-input').fill('');
+    await page.getByTestId('phone-input').fill('');
 
-    await this.page.getByTestId('phone-input').fill('99900888');
+    await page.getByTestId('phone-input').fill('99900888');
 
-    await this.page.getByTestId('save-details-button').click()
+    await page.getByTestId('save-details-button').click()
 }
 
 

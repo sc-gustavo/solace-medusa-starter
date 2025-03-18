@@ -31,7 +31,7 @@ test.describe('Account settings page', () => {
 
     // go to account settings
     await accountSettings.goToAccountSettings()
-
+    
     // edit acconut details
     await accountSettings.editAccountDetails()
 

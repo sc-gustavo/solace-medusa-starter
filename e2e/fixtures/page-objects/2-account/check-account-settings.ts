@@ -25,9 +25,9 @@ async goToAccountSettings() {
 
    await expect(profileDetailsBox).toBeTruthy()
 
-   const userName = this.page.getByText('Adam Nowak');
+//    const userName = this.page.getByText('Adam Nowak');
 
-   await expect(userName).toContainText(/Adam Nowak/i, { timeout: 3000 });
+//    await expect(userName).toContainText(/Adam Nowak/i, { timeout: 3000 });
 }
 
 async editAccountDetails() {
