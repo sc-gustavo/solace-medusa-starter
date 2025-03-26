@@ -65,12 +65,10 @@ class AboutUsPage {
     const whyUsGrid = await this.page.locator('.grid.gap-4')
     expect(whyUsGrid).toBeVisible()
 
-    const whyUsBoxes = this.page
-      .locator('h3')
-      .filter({
-        hasText:
-          /Timeless design|Exceptional quality|Sustainable practices|Tailored solutions/,
-      })
+    const whyUsBoxes = this.page.locator('h3').filter({
+      hasText:
+        /Timeless design|Exceptional quality|Sustainable practices|Tailored solutions/,
+    })
     await expect(whyUsBoxes).toHaveCount(4)
   }
 
@@ -112,12 +110,10 @@ class AboutUsPage {
     await expect(getInspiredHeading).toHaveText(/Get inspired/i)
 
     // check section boxes
-    const getInspiredBoxes = this.page
-      .locator('.flex.min-w-40')
-      .filter({
-        hasText:
-          /Maximizing small spaces|Caring for wood furniture|Trends in designer furniture/,
-      })
+    const getInspiredBoxes = this.page.locator('.flex.min-w-40').filter({
+      hasText:
+        /Maximizing small spaces|Caring for wood furniture|Trends in designer furniture/,
+    })
     await expect(getInspiredBoxes).toHaveCount(6)
 
     //check redirection to blog
