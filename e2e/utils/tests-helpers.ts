@@ -136,6 +136,33 @@ export async function goToAccount(page) {
     await expect(page).toHaveURL(/\/account/)
 }
 
+export async function addNewShippingDetailsAddress(page) {
+
+    await waitForPageLoad(page)
+  
+    await page.getByTestId('first-name-input').fill('Adam');
+  
+    await page.getByTestId('last-name-input').fill('Nowak');
+  
+    await page.getByTestId('company-input').fill('Firma');
+  
+    await page.getByTestId('address-1-input').fill('Mokra 12');
+  
+    await page.getByTestId('postal-code-input').fill('00-999');
+  
+    await page.getByTestId('city-input').fill('Warsaw');
+
+    await page.getByTestId('country-select').selectOption('de');
+  
+    await page.getByTestId('state-input').fill('Mazowieckie');
+
+    await page.getByTestId('phone-input').fill('444222000');
+
+    await page.getByTestId('save-address-button').click()
+
+    await waitForPageLoad(page)
+  }
+
 
 
 
@@ -150,7 +177,8 @@ const helpers = {
     goToCartPage,
     fillShippingAddressInputs,
     orderProductFlow,
-    goToAccount
+    goToAccount,
+    addNewShippingDetailsAddress
 };
 export default helpers;
 
