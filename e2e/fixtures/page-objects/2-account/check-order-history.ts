@@ -68,7 +68,7 @@ class OrderHistory {
 
     await helpers.waitForPageLoad(this.page)
 
-    await expect(this.page).toHaveURL(/\/account\/orders$/)
+    await expect(this.page.url()).toContain('/account/orders/')
   }
 }
 export default OrderHistory

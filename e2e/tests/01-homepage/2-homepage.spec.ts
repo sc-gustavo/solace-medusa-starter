@@ -14,40 +14,40 @@ test.describe('Homepage Tests', () => {
   })
 
   test('Check page loading and it`s title', async ({ page }) => {
-    homepage.checkPageTitle()
+    await homepage.checkPageTitle()
   })
 
   test('Check header redirections', async ({ page }) => {
-    homepage.checkShopTab()
+    await homepage.checkShopTab()
 
-    homepage.checkCollectionsTab()
+    await homepage.checkCollectionsTab()
 
-    homepage.checkAboutUsTab()
+    await homepage.checkAboutUsTab()
   })
 
   test('Check img existing', async ({ page }) => {
-    homepage.checkImgExisting()
+    await homepage.checkImgExisting()
   })
 
   test('Check redirection to `All products` by `Explore now` button', async ({
     page,
   }) => {
-    homepage.checkRedirectionByExploreNowBtn()
+    await homepage.checkRedirectionByExploreNowBtn()
   })
 
   test('Check redirections from `Our bestsellers` section', async ({
     page,
   }) => {
-    homepage.checkRedirectionToSingleProduct()
+    await homepage.checkRedirectionToSingleProduct()
 
-    homepage.checkRedirectionByViewAllBtn()
+    await homepage.checkRedirectionByViewAllBtn()
   })
 
   test('Check redirections to blog from `Get inspired` section', async ({
     page,
   }) => {
-    homepage.checkRedirectionToSingleBlogPost()
+    await homepage.checkRedirectionToSingleBlogPost()
 
-    homepage.checkRedirectionToAllBlogPosts()
+    await homepage.checkRedirectionToAllBlogPosts()
   })
 })

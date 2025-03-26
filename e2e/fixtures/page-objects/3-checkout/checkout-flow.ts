@@ -181,8 +181,6 @@ class Checkout {
 
     await helpers.waitForPageLoad(this.page)
 
-    await this.page.waitForTimeout(3000)
-
     // check order confirmation page items
     const orderConfirmedPage = await this.page.locator('h1').textContent()
 
