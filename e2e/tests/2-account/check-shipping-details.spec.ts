@@ -10,7 +10,7 @@ test.describe('Shipping details in account settings page', () => {
 
   test.beforeEach(async ({ page, browser }) => {
 
-    shippingDetails= new ShippingDetails(page)
+    shippingDetails = new ShippingDetails(page)
 
     await helpers.waitForPageLoad(page)
   });
