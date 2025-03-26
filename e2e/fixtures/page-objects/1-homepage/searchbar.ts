@@ -1,7 +1,7 @@
 export{}
 
 import { Page, expect } from '@playwright/test'
-import waitForPageLoad  from '../../../utils/tests-helpers'
+import helpers  from '../../../utils/tests-helpers'
 
 class Searchbar {
 
@@ -13,7 +13,7 @@ class Searchbar {
 
 async checkSearchbarVisibility() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     await this.page.getByTestId('search-button').click();
 
@@ -30,7 +30,7 @@ async checkSearchbarVisibility() {
 
 async checkRealProductSearching() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     await this.page.getByTestId('search-button').click();
 
@@ -55,7 +55,7 @@ async checkRealProductSearching() {
 
 async checkNonExistingProductSearching() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     await this.page.getByTestId('search-button').click();
 

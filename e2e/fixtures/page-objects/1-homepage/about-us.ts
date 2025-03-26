@@ -1,7 +1,7 @@
 export{}
 
 import { Page, expect } from '@playwright/test'
-import waitForPageLoad  from '../../../utils/tests-helpers'
+import helpers  from '../../../utils/tests-helpers'
 
 class AboutUsPage {
 
@@ -13,7 +13,7 @@ class AboutUsPage {
 
 async checkLoadingAndHeader() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     const pageTitle = await this.page.title();
 
@@ -22,7 +22,7 @@ async checkLoadingAndHeader() {
 
 async checkPageHeaderAndLogo() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     const headerLogo = this.page.locator('div').filter({ hasText: 'Solace Logo Big' })
 
@@ -31,7 +31,7 @@ async checkPageHeaderAndLogo() {
 
 async checkOurStorySection() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     const ourStorySection = this.page.locator('div').filter({ hasText: 'Our story' }).first()
 
@@ -46,7 +46,7 @@ async checkOurStorySection() {
 
 async checkWhyUsSection() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     const whyUsSection = this.page.getByText('Why us?')
 
@@ -68,7 +68,7 @@ async checkWhyUsSection() {
 
 async checkOurCraftsmanshipSection() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     const ourCraftsmanshipSection = this.page.locator('div').filter({ hasText: 'Our craftsmanship' }).first()
 
@@ -83,7 +83,7 @@ async checkOurCraftsmanshipSection() {
 
 async checkGetInspiredSection() {
 
-    await waitForPageLoad(this.page)
+    await helpers.waitForPageLoad(this.page)
 
     const getInspiredSection = this.page.locator('div').filter({ hasText: 'Get inspired' }).first()
 
