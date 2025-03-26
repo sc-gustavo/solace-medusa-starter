@@ -1,59 +1,58 @@
-export{}
-import { test, expect } from '@playwright/test';
-import helpers from '../../utils/tests-helpers';
-import Signup from '../../fixtures/page-objects/2-account/signup';
+import { expect, test } from '@playwright/test'
 
-test.describe('Signup Tests', () => { 
+import Signup from '../../fixtures/page-objects/2-account/signup'
+import helpers from '../../utils/tests-helpers'
 
+export {}
+
+test.describe('Signup Tests', () => {
   let signup: Signup
 
-test.beforeEach(async ({ page }) => {
-
+  test.beforeEach(async ({ page }) => {
     signup = new Signup(page)
 
     helpers.waitForPageLoad(page)
-
-  });
+  })
 
   test.afterEach(async ({ page }, testInfo) => {
     if (testInfo.status !== 'timedOut' && testInfo.status !== 'interrupted') {
-      await page.close();
+      await page.close()
     }
-  });
+  })
 
-test('Go to `/account` page', async ({ page }) => {
-
+  test('Go to `/account` page', async ({ page }) => {
     await helpers.goToSignUpPage(page)
 
     await page.waitForURL(signup.accountPageUrl)
 
     await expect(page).toHaveURL(/\/account/)
-})
+  })
 
-test('Check `Create account` page items and inputs validation', async ({ page }) => {
+  test('Check `Create account` page items and inputs validation', async ({
+    page,
+  }) => {
+    await helpers.goToSignUpPage(page)
 
-  await helpers.goToSignUpPage(page)
+    await signup.checkHeaderAndFormComponent()
 
-  await signup.checkHeaderAndFormComponent()
+    await signup.checkEmptyInputsValidation()
 
-  await signup.checkEmptyInputsValidation()
+    await signup.checkInvalidPasswordCharacters()
 
-  await signup.checkInvalidPasswordCharacters()
+    await signup.checkPasswordLackOfUpperCase()
 
-  await signup.checkPasswordLackOfUpperCase()
+    await signup.checkPasswordLackOfNumberOrSymbol()
+  })
 
-  await signup.checkPasswordLackOfNumberOrSymbol()
-})
-
-test('Check transition between `signup` and `signin` pages', async ({ page }) => {
-
+  test('Check transition between `signup` and `signin` pages', async ({
+    page,
+  }) => {
     await helpers.goToSignUpPage(page)
 
     await signup.checkTransitionBetweenLogInAndSignUp()
-})
+  })
 
-test('Fill inputs and correctly signup', async ({ page }) => {
-
-  await signup.checkCorrectlySignUp()
+  test('Fill inputs and correctly signup', async ({ page }) => {
+    await signup.checkCorrectlySignUp()
+  })
 })
-});

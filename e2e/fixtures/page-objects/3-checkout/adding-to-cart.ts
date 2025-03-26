@@ -1,22 +1,22 @@
+import { expect, Page } from '@playwright/test'
+
+import helpers from '../../../utils/tests-helpers'
+
 export {}
 
-import { Page, expect } from '@playwright/test'
-import helpers  from '../../../utils/tests-helpers'
-
 class AddToCart {
+  page: Page
+  singleProductPageUrl: string
+  cartPage: string
 
-    page: Page
-    singleProductPageUrl: string
-    cartPage: string
+  constructor(page: Page) {
+    this.page = page
+    this.singleProductPageUrl =
+      'https://solace-medusa-starter.vercel.app/de/products/winsdor-bar-stool'
+    this.cartPage = 'https://solace-medusa-starter.vercel.app/de/cart'
+  }
 
-    constructor(page: Page) {
-        this.page = page;
-        this.singleProductPageUrl = 'https://solace-medusa-starter.vercel.app/de/products/winsdor-bar-stool';
-        this.cartPage = 'https://solace-medusa-starter.vercel.app/de/cart'
-    }
-
-async checkSingleProduct() {
-
+  async checkSingleProduct() {
     await helpers.goToSingleProductPage(this.page)
 
     const productTitle = await this.page.getByTestId('product-title')
@@ -26,26 +26,27 @@ async checkSingleProduct() {
     const productPrice = await this.page.getByTestId('product-price')
 
     expect(productPrice).toBeTruthy()
-}
+  }
 
-async addProductToCart() {
-
+  async addProductToCart() {
     await helpers.goToSingleProductPage(this.page)
 
-    await this.page.getByTestId('add-product-button').click();
+    await this.page.getByTestId('add-product-button').click()
 
-    const shoppingCartModalHeader =  await this.page.getByTestId('nav-cart-dropdown').locator('div').filter({ hasText: 'Shopping Cart' })
+    const shoppingCartModalHeader = await this.page
+      .getByTestId('nav-cart-dropdown')
+      .locator('div')
+      .filter({ hasText: 'Shopping Cart' })
 
     await helpers.waitForPageLoad(this.page)
 
     await this.page.waitForTimeout(3000)
 
     expect(shoppingCartModalHeader).toBeTruthy()
-}
+  }
 
-async goToCartViaBagIcon() {
-
-    await this.page.getByTestId('nav-cart-link').click();
+  async goToCartViaBagIcon() {
+    await this.page.getByTestId('nav-cart-link').click()
 
     await this.page.waitForURL(this.cartPage)
 
@@ -58,36 +59,38 @@ async goToCartViaBagIcon() {
     await this.page.waitForURL(this.singleProductPageUrl)
 
     await expect(this.page).toHaveURL(/products\/winsdor-bar-stool/)
-}
+  }
 
-async goToCartViaButton() {
+  async goToCartViaButton() {
+    await this.page.getByTestId('nav-cart-link').hover()
 
-    await this.page.getByTestId('nav-cart-link').hover();
+    await this.page.waitForLoadState('domcontentloaded')
 
-    await this.page.waitForLoadState('domcontentloaded');
-
-    await this.page.getByTestId('go-to-cart-button').click();
+    await this.page.getByTestId('go-to-cart-button').click()
 
     await this.page.waitForURL(this.cartPage)
 
     await expect(this.page).toHaveURL(/\/cart/)
 
     await helpers.waitForPageLoad(this.page)
-}
+  }
 
-async checkCartItems() {
-
+  async checkCartItems() {
     await helpers.goToCartPage(this.page)
 
     const cartItem = await this.page.getByTestId('cart-item')
 
     expect(cartItem).toBeTruthy()
 
-    const promoCodeItem = await this.page.getByTestId('discount-code-accordion-trigger')
+    const promoCodeItem = await this.page.getByTestId(
+      'discount-code-accordion-trigger'
+    )
 
     expect(promoCodeItem).toBeTruthy()
 
-    const subtotalPrice = await this.page.getByText('Subtotal (excl. shipping and taxes)€')
+    const subtotalPrice = await this.page.getByText(
+      'Subtotal (excl. shipping and taxes)€'
+    )
 
     expect(subtotalPrice).toBeTruthy()
 
@@ -95,29 +98,31 @@ async checkCartItems() {
 
     expect(totalPrice).toBeTruthy()
 
-    const proceedToCheckoutButton = await this.page.getByRole('button', { name: 'Proceed to checkout' })
+    const proceedToCheckoutButton = await this.page.getByRole('button', {
+      name: 'Proceed to checkout',
+    })
 
     expect(proceedToCheckoutButton).toBeTruthy()
-}
+  }
 
-async checkRemovingItemFromCart() {
-
+  async checkRemovingItemFromCart() {
     await helpers.goToCartPage(this.page)
 
     await this.page.waitForURL(this.cartPage)
 
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.page.waitForLoadState('domcontentloaded')
 
-    await this.page.getByTestId('delete-button').click();
+    await this.page.getByTestId('delete-button').click()
 
     const toast = await this.page.getByText('Product was removed from cart.')
 
     expect(toast).toBeTruthy()
 
-    const emptyCartPlaceholder = await this.page.getByRole('heading', { name: 'Your shopping cart is empty' })
+    const emptyCartPlaceholder = await this.page.getByRole('heading', {
+      name: 'Your shopping cart is empty',
+    })
 
     expect(emptyCartPlaceholder).toBeTruthy()
-}
-
+  }
 }
 export default AddToCart

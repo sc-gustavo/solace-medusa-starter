@@ -1,177 +1,179 @@
-export{}
+import { expect, Page } from '@playwright/test'
 
-import { Page, expect } from '@playwright/test'
-import helpers  from '../../../utils/tests-helpers'
+import helpers from '../../../utils/tests-helpers'
+
+export {}
+
 class ShopPage {
+  page: Page
+  shopPageUrl: string
+  homeURL: string
+  shopWithFiltersUrl: string
 
-    page: Page
-    shopPageUrl: string
-    homeURL: string
-    shopWithFiltersUrl: string
+  constructor(page: Page) {
+    this.page = page
+    this.shopPageUrl = 'https://solace-medusa-starter.vercel.app/de/shop'
+    this.shopWithFiltersUrl =
+      'https://solace-medusa-starter.vercel.app/de/shop?collection=pcol_01J93QK3N82DHGC3K3XE19YMVG&type=ptyp_01J93Z6T952WCBPX62QFM2SADB&material=Leather&price=under-100'
+  }
 
-    constructor(page: Page) {
-        this.page = page;
-        this.shopPageUrl = 'https://solace-medusa-starter.vercel.app/de/shop';
-        this.shopWithFiltersUrl = 'https://solace-medusa-starter.vercel.app/de/shop?collection=pcol_01J93QK3N82DHGC3K3XE19YMVG&type=ptyp_01J93Z6T952WCBPX62QFM2SADB&material=Leather&price=under-100'
-    }
+  async checkTitleAndHeading() {
+    await this.page.goto(this.shopPageUrl)
 
-    async checkTitleAndHeading() {
+    expect(this.shopPageUrl).toContain('/shop')
 
-        await this.page.goto(this.shopPageUrl)
+    await this.page.waitForSelector('h1')
 
-        expect(this.shopPageUrl).toContain('/shop')
+    const pageHeader = await this.page.$eval('h1', (el) => el.textContent)
 
-        await this.page.waitForSelector('h1');
+    expect(pageHeader).toBe('All products')
+  }
 
-        const pageHeader = await this.page.$eval('h1', el => el.textContent);
+  async checkFilteringByCollections() {
+    await this.page.goto(this.shopPageUrl)
 
-        expect(pageHeader).toBe('All products')
+    await helpers.waitForPageLoad(this.page)
 
-    }
+    expect(this.shopPageUrl).toContain('/shop')
 
-    async checkFilteringByCollections() {
+    const collectionFilterBtn = this.page.getByLabel('Choose collection/s')
 
-        await this.page.goto(this.shopPageUrl)
-        
-        await helpers.waitForPageLoad(this.page)
+    await expect(collectionFilterBtn).toBeVisible()
 
-        expect(this.shopPageUrl).toContain('/shop')
+    await collectionFilterBtn.click({ force: true })
 
-        const collectionFilterBtn = this.page.getByLabel('Choose collection/s')
+    // single item from filter check and click
+    await this.page
+      .locator('[data-testid="ashton-filter-item"] button[role="checkbox"]')
+      .waitFor()
 
-        await expect(collectionFilterBtn).toBeVisible()
+    await this.page
+      .locator('[data-testid="ashton-filter-item"] button[role="checkbox"]')
+      .click({ force: true })
+  }
 
-        await collectionFilterBtn.click({force: true});
+  async checkFilteringByProductType() {
+    await this.page.goto(this.shopPageUrl)
 
-        // single item from filter check and click
-        await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').waitFor()
-        
-        await this.page.locator('[data-testid="ashton-filter-item"] button[role="checkbox"]').click({ force: true });
+    await helpers.waitForPageLoad(this.page)
 
-    }
+    expect(this.shopPageUrl).toContain('/shop')
 
-    async checkFilteringByProductType() {
+    const productTypeFilterBtn = this.page.getByLabel('Choose product type/s')
 
-        await this.page.goto(this.shopPageUrl)
+    await productTypeFilterBtn.click()
 
-        await helpers.waitForPageLoad(this.page)
+    // single item from filter check and click
+    expect(this.page.getByTestId('barstools-filter-item')).toBeVisible()
 
-        expect(this.shopPageUrl).toContain('/shop')
+    await this.page
+      .locator('[data-testid="barstools-filter-item"] button[role="checkbox"]')
+      .click()
+  }
 
-        const productTypeFilterBtn = this.page.getByLabel('Choose product type/s')
+  async checkFilteringByMaterial() {
+    await this.page.goto(this.shopPageUrl)
 
-        await productTypeFilterBtn.click();
+    await helpers.waitForPageLoad(this.page)
 
-        // single item from filter check and click
-        expect(this.page.getByTestId('barstools-filter-item')).toBeVisible()
+    expect(this.shopPageUrl).toContain('/shop')
 
-        await this.page.locator('[data-testid="barstools-filter-item"] button[role="checkbox"]').click()
-    }
+    const materialFilterBtn = this.page.getByLabel('Choose material/s')
 
-    async checkFilteringByMaterial() {
+    await materialFilterBtn.click()
 
-        await this.page.goto(this.shopPageUrl)
+    // single item from filter check and click
+    expect(this.page.getByTestId('leather-filter-item')).toBeVisible()
 
-        await helpers.waitForPageLoad(this.page)
+    await this.page
+      .locator('[data-testid="leather-filter-item"] button[role="checkbox"]')
+      .click()
+  }
 
-        expect(this.shopPageUrl).toContain('/shop')
+  async checkFilteringByPrice() {
+    await this.page.goto(this.shopPageUrl)
 
-        const materialFilterBtn = this.page.getByLabel('Choose material/s')
+    await helpers.waitForPageLoad(this.page)
 
-        await materialFilterBtn.click();
+    expect(this.shopPageUrl).toContain('/shop')
 
-        // single item from filter check and click
-        expect(this.page.getByTestId('leather-filter-item')).toBeVisible()
+    const priceFilterBtn = this.page.getByLabel('Choose price')
 
-        await this.page.locator('[data-testid="leather-filter-item"] button[role="checkbox"]').click()
-    }
+    await priceFilterBtn.click()
 
-    async checkFilteringByPrice() {
+    // single item from filter check and click
+    expect(this.page.getByTestId('under-$100-filter-item')).toBeVisible()
 
-        await this.page.goto(this.shopPageUrl)
+    await this.page
+      .locator('[data-testid="under-$100-filter-item"] button[role="checkbox"]')
+      .click()
+  }
 
-        await helpers.waitForPageLoad(this.page)
+  async checkFilterResults() {
+    await this.page.goto(this.shopWithFiltersUrl)
 
-        expect(this.shopPageUrl).toContain('/shop')
+    await helpers.waitForPageLoad(this.page)
 
-        const priceFilterBtn = this.page.getByLabel('Choose price')
+    // Check filtered product by params from URL
+    const regex = /(?:[?&])(collection|type|material|price)=/
 
-        await priceFilterBtn .click();
+    expect(this.shopWithFiltersUrl).toMatch(regex)
+  }
 
-        // single item from filter check and click
-        expect(this.page.getByTestId('under-$100-filter-item')).toBeVisible()
+  async checkRecommendedProducts() {
+    await this.page.goto(this.shopPageUrl)
 
-        await this.page.locator('[data-testid="under-$100-filter-item"] button[role="checkbox"]').click()
-    }
-    
-    async checkFilterResults() {
+    await helpers.waitForPageLoad(this.page)
 
-        await this.page.goto(this.shopWithFiltersUrl)
+    expect(this.shopPageUrl).toContain('/shop')
 
-        await helpers.waitForPageLoad(this.page)
-    
-        // Check filtered product by params from URL
-        const regex = /(?:[?&])(collection|type|material|price)=/;
-    
-        expect(this.shopWithFiltersUrl).toMatch(regex);
-    }
-    
+    const recommendedProductsHeading = this.page.getByRole('heading', {
+      name: 'Recommended products',
+    })
 
-    async checkRecommendedProducts() {
+    expect(recommendedProductsHeading).toHaveText('Recommended products')
 
-        await this.page.goto(this.shopPageUrl)
+    // check recomended products existing
+    const recommendedProductsSection = this.page.locator('.flex.gap-2')
 
-        await helpers.waitForPageLoad(this.page)
+    const allRecommendedProducts = recommendedProductsSection.locator('*')
 
-        expect(this.shopPageUrl).toContain('/shop')
+    const recommendedProductsCount = await allRecommendedProducts.count()
 
-        const recommendedProductsHeading = this.page.getByRole('heading', { name: 'Recommended products' })
+    expect(recommendedProductsCount).toBeGreaterThan(0)
+  }
 
-        expect(recommendedProductsHeading).toHaveText('Recommended products')
+  async checkPagination() {
+    await this.page.goto(this.shopPageUrl)
 
-        // check recomended products existing
-        const recommendedProductsSection = this.page.locator('.flex.gap-2');
+    await helpers.waitForPageLoad(this.page)
 
-        const allRecommendedProducts = recommendedProductsSection.locator('*');
+    const pagination = this.page.getByTestId('product-pagination')
 
-        const recommendedProductsCount = await allRecommendedProducts.count();
+    expect(pagination).toBeVisible()
 
-        expect(recommendedProductsCount).toBeGreaterThan(0);
+    // click on second page
+    const page2Link = pagination.locator('a', { hasText: '2' })
 
-    }
+    await page2Link.waitFor()
 
-    async checkPagination() {
+    page2Link.click()
 
-        await this.page.goto(this.shopPageUrl)
+    await this.page.waitForURL(/.*page=2/)
 
-        await helpers.waitForPageLoad(this.page)
+    expect(this.page.url()).toContain('page=2')
 
-        const pagination = this.page.getByTestId('product-pagination')
+    // click on first page
+    const page1Link = pagination.locator('a', { hasText: '1' })
 
-        expect(pagination).toBeVisible()
-  
-        // click on second page
-        const page2Link = pagination.locator('a', { hasText: '2' });
+    await page1Link.waitFor()
 
-        await page2Link.waitFor();
+    page1Link.click()
 
-        page2Link.click()
+    await this.page.waitForURL(/.*page=1/)
 
-        await this.page.waitForURL(/.*page=2/);
-
-        expect(this.page.url()).toContain('page=2');
-
-        // click on first page
-        const page1Link = pagination.locator('a', { hasText: '1' });
-
-        await page1Link.waitFor();
-
-        page1Link.click()
-
-        await this.page.waitForURL(/.*page=1/);
-
-        expect(this.page.url()).toContain('page=1');
-    }
+    expect(this.page.url()).toContain('page=1')
+  }
 }
 
-export default ShopPage;
+export default ShopPage

@@ -1,4 +1,4 @@
-export{}
+export {}
 // import { seedDiscount, seedUser } from '../../../data/seed'
 // import { expect, test } from '../../../index'
 

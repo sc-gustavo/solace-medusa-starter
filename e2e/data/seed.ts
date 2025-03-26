@@ -101,7 +101,7 @@ export {}
 
 // async function loginAdmin() {
 //   const resp = await axios.post('/auth/user/emailpass', {
-    
+
 //     email: process.env.MEDUSA_ADMIN_EMAIL || 'admin@medusa-test.com',
 //     password: process.env.MEDUSA_ADMIN_PASSWORD || 'supersecret',
 //   })

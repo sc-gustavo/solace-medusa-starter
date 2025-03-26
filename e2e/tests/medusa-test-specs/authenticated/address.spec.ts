@@ -1,4 +1,4 @@
-export{}
+export {}
 // import { AddressesPage } from '../../../fixtures/medusa-test-fixtures/account/addresses-page'
 // import { expect, test } from '../../../index'
 // import { getSelectedOptionText } from '../../../utils/locators'

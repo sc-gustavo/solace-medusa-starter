@@ -1,27 +1,26 @@
-export{}
-import { test } from '@playwright/test';
-import helpers from '../../utils/tests-helpers';
+import { test } from '@playwright/test'
+
 import OrderHistory from '../../fixtures/page-objects/2-account/check-order-history'
+import helpers from '../../utils/tests-helpers'
+
+export {}
 
 test.describe('Order history page', () => {
-
-    let orderHistory: OrderHistory
+  let orderHistory: OrderHistory
 
   test.beforeEach(async ({ page, browser }) => {
-
     orderHistory = new OrderHistory(page)
 
     await helpers.waitForPageLoad(page)
-  });
+  })
 
   test.afterEach(async ({ page }, testInfo) => {
     if (testInfo.status !== 'timedOut' && testInfo.status !== 'interrupted') {
-      await page.close();
+      await page.close()
     }
-  });
+  })
 
   test('Check order history page and single order page', async ({ page }) => {
-
     // login
     await helpers.login(page)
 
@@ -36,5 +35,5 @@ test.describe('Order history page', () => {
 
     // check single order page
     await orderHistory.checkSingleOrderPage()
-})
+  })
 })

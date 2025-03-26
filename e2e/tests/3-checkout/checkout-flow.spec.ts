@@ -1,25 +1,24 @@
-export{}
+import { test } from '@playwright/test'
 
-import { test } from '@playwright/test';
 import Checkout from '../../fixtures/page-objects/3-checkout/checkout-flow'
-import helpers from '../../utils/tests-helpers';
+import helpers from '../../utils/tests-helpers'
+
+export {}
 
 test.describe('Checkout flow', () => {
-
   let checkout: Checkout
 
   test.beforeEach(async ({ page, browser }) => {
-
     checkout = new Checkout(page)
 
     await helpers.waitForPageLoad(page)
-  });
+  })
 
   test.afterEach(async ({ page }, testInfo) => {
     if (testInfo.status !== 'timedOut' && testInfo.status !== 'interrupted') {
-      await page.close();
+      await page.close()
     }
-  });
+  })
 
   test('Check flow of whole purchasing process', async ({ page }) => {
     // add product to cart
@@ -51,7 +50,5 @@ test.describe('Checkout flow', () => {
 
     // check order confirmation items
     await checkout.checkOrderConfirmationPage()
-
   })
-
 })

@@ -1,4 +1,4 @@
-export{}
+export {}
 // import { expect, test } from '../../../index'
 
 // test.describe('User registration functionality', async () => {

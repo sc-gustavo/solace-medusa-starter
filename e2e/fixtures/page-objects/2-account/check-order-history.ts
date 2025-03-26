@@ -1,18 +1,17 @@
-export{}
+import { expect, Page } from '@playwright/test'
 
-import { Page, expect } from '@playwright/test'
-import helpers from '../../../utils/tests-helpers';
+import helpers from '../../../utils/tests-helpers'
+
+export {}
 
 class OrderHistory {
+  page: Page
 
-    page: Page
+  constructor(page: Page) {
+    this.page = page
+  }
 
-    constructor(page: Page) {
-        this.page = page;
-    }
-
-async checkOrderHistoryPage() {
-
+  async checkOrderHistoryPage() {
     await this.page.locator("li[data-testid='order-history-nav-item']").click()
 
     await expect(this.page).toHaveURL(/\/account\/orders$/)
@@ -20,19 +19,22 @@ async checkOrderHistoryPage() {
     const allOrders = await this.page.getByTestId('orders-page-wrapper')
 
     expect(allOrders).toBeTruthy()
-}
+  }
 
-async checkSingleOrderPage() {
-
-    await this.page.getByRole('link', { name: 'View order' }).first().click();
+  async checkSingleOrderPage() {
+    await this.page.getByRole('link', { name: 'View order' }).first().click()
 
     await expect(this.page).toHaveURL(/\/account\/orders\/details/)
 
-    const orderDetailsContainer = await this.page.getByTestId('order-details-container')
+    const orderDetailsContainer = await this.page.getByTestId(
+      'order-details-container'
+    )
 
     expect(orderDetailsContainer).toBeTruthy()
 
-    const orderNumberHeading = await this.page.getByRole('heading', { name: 'Order #' })
+    const orderNumberHeading = await this.page.getByRole('heading', {
+      name: 'Order #',
+    })
 
     expect(orderNumberHeading).toBeTruthy()
 
@@ -44,7 +46,9 @@ async checkSingleOrderPage() {
 
     expect(totalPrice).toBeTruthy()
 
-    const shippingAddress = await this.page.getByText('Shipping address', { exact: true })
+    const shippingAddress = await this.page.getByText('Shipping address', {
+      exact: true,
+    })
 
     expect(shippingAddress).toBeTruthy()
 
@@ -60,12 +64,11 @@ async checkSingleOrderPage() {
 
     expect(paymentMethod).toBeTruthy()
 
-    await this.page.getByTestId('back-to-overview-button').click();
+    await this.page.getByTestId('back-to-overview-button').click()
 
     await helpers.waitForPageLoad(this.page)
 
     await expect(this.page).toHaveURL(/\/account\/orders$/)
-
-}
+  }
 }
 export default OrderHistory
