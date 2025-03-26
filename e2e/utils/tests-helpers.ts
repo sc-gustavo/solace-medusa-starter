@@ -22,6 +22,13 @@ export async function fillSignupInputs(page) {
     await page.getByLabel('I read and agree to Terms &').click();
 }
 
+export async function fillSignInInputs(page) {
+
+    await page.getByTestId('email-input').fill('nowak@example.com');
+
+    await page.getByTestId('password-input').fill('Password!1');
+}
+
 export async function goToSignUpPage(page) {
 
     await page.goto('https://solace-medusa-starter.vercel.app/de')
@@ -31,19 +38,22 @@ export async function goToSignUpPage(page) {
     await page.getByRole('link', { name: 'Sign up' }).click();
 }
 
+export async function goToSignInPage(page) {
+
+    await page.goto('https://solace-medusa-starter.vercel.app/de')
+
+    await page.getByTestId('profile-dropdown-button').hover()
+
+    await page.getByRole('link', { name: 'Sign in' }).click();
+}
+
 
 const helpers = {
     waitForPageLoad,
     fillSignupInputs,
-    goToSignUpPage
+    fillSignInInputs,
+    goToSignUpPage,
+    goToSignInPage
 };
 export default helpers;
 
-
-
-/* import should looks like:
-import helpers from './nazwaPliku';
-
-await helpers.waitForPageLoad(page);
-await helpers.fillSignupInputs(page);
-*/
