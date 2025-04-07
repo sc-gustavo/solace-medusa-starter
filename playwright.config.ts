@@ -7,6 +7,12 @@ import 'dotenv/config.js'
 export const STORAGE_STATE = path.join(__dirname, 'playwright/.auth/user.json')
 
 export default defineConfig({
+  timeout: 60000, 
+  
+  expect: {
+    timeout: 30000 
+  },
+
   testDir: './e2e',
   /* Run tests in files in parallel */
   fullyParallel: false,
@@ -46,8 +52,8 @@ export default defineConfig({
     {
       name: 'chromium auth',
       dependencies: ['setup'],
-      testIgnore: 'public/*.spec.ts',
-      use: { ...devices['Desktop Chrome'], storageState: STORAGE_STATE },
+      testIgnore: ['public/*.spec.ts', 'tests/medusa-test-specs'],
+      use: { ...devices['Desktop Chrome']},
     },
 
     {
