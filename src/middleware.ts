@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { HttpTypes } from '@medusajs/types'
@@ -31,7 +30,7 @@ async function getRegionMap() {
     }).then((res) => res.json())
 
     if (!regions?.length) {
-      notFound()
+      throw new Error('No regions found from Medusa backend')
     }
 
     // Create a map of country codes to regions.

@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import Image from 'next/image'
 
 import { cn } from '@lib/util/cn'
+import { getStrapiImageUrl } from '@lib/util/strapi-image'
 import { StoreCollection } from '@medusajs/types'
 import { Box } from '@modules/common/components/box'
 import { Button } from '@modules/common/components/button'
@@ -106,7 +107,7 @@ const Collections = ({
           key={id}
           title={element.Title}
           handle={element.Handle}
-          imgSrc={element.Image.url}
+          imgSrc={getStrapiImageUrl(element.Image.url)}
           description={element.Description}
           id={id}
         />

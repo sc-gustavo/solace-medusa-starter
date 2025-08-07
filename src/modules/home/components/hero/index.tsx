@@ -6,6 +6,7 @@ import { Container } from '@modules/common/components/container'
 import { Heading } from '@modules/common/components/heading'
 import LocalizedClientLink from '@modules/common/components/localized-client-link'
 import { Text } from '@modules/common/components/text'
+import { getStrapiImageUrl } from '@lib/util/strapi-image'
 import { HeroBanner } from 'types/strapi'
 
 const Hero = ({ data }: { data: HeroBanner }) => {
@@ -15,7 +16,7 @@ const Hero = ({ data }: { data: HeroBanner }) => {
     <>
       <Box className="h-[168px] max-h-[368px] w-full small:h-[368px] 2xl:h-[468px] 2xl:max-h-[468px]">
         <Image
-          src={bannerImage.url}
+          src={getStrapiImageUrl(bannerImage.url)}
           alt={bannerImage.alternativeText ?? 'Banner image'}
           className="h-full w-full object-cover"
           width={1000}

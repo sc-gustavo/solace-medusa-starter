@@ -4,6 +4,7 @@ import { Box } from '@modules/common/components/box'
 import { Heading } from '@modules/common/components/heading'
 import LocalizedClientLink from '@modules/common/components/localized-client-link'
 import { Text } from '@modules/common/components/text'
+import { getStrapiImageUrl } from '@lib/util/strapi-image'
 import { BlogPost } from 'types/strapi'
 
 export function BlogTile({ post }: { post: BlogPost }) {
@@ -13,7 +14,7 @@ export function BlogTile({ post }: { post: BlogPost }) {
         <LocalizedClientLink href={`/blog/${post.Slug}`}>
           <Image
             className="h-full w-full object-cover object-center"
-            src={post.FeaturedImage.url}
+            src={getStrapiImageUrl(post.FeaturedImage.url)}
             alt={post.FeaturedImage.alternativeText ?? 'Blog post image'}
             width={600}
             height={600}
